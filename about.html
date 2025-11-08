@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me - Guido Gonzalez</title>
+  <meta name="description" content="Learn more about Guido Gonzalez — a 3D Rigger and Technical Director passionate about rigging, pipelines, and workflow optimization." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+
+  <style>
+    /* === Base Styles === */
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+      line-height: 1.6;
+      background-image: url('assets/bg.jpg');
+      background-attachment: fixed;
+      background-position: center;
+      animation: subtleBackground 20s ease-in-out infinite alternate;
+    }
+
+
+    /* === Navigation === */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 20px 0;
+      background-color: transparent;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 400;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #ffffff;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    nav a.active {
+      color: #696969;
+    }
+
+    /* === Content === */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease forwards 0.4s;
+    }
+
+    /* === Profile Header === */
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease forwards 0.6s;
+    }
+
+    .profile-header img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 2px solid #ffffff;
+      transform: scale(0.9);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .profile-header img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 3rem;
+      color: #ffffff;
+      position: relative;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 50px;
+      height: 2px;
+      background: #696969;
+      animation: growLine 1s ease forwards;
+    }
+
+    @keyframes growLine {
+      from { width: 0; opacity: 0; }
+      to { width: 50px; opacity: 1; }
+    }
+
+    p, li {
+      color: #ccc;
+      font-size: 1rem;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    li strong {
+      color: #fff;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    .two-column {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .two-column > div {
+      flex: 1 1 45%;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    /* === Hover Effects for Links === */
+    a[href^="mailto"], a[href^="https"] {
+      position: relative;
+    }
+
+    a[href^="mailto"]:hover, a[href^="https"]:hover {
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff;
+      transition: all 0.3s ease;
+    }
+
+    /* === Animations === */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .two-column {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="./index.html">HOME</a>
+    <a href="./about.html" class="active">ABOUT ME</a>
+    <a href="./blog.html">BLOG</a>
+  </nav>
+
+  <main>
+    <div class="profile-header">
+      <img src="assets/guido.jpeg" alt="Guido Gonzalez Photo" />
+      <h1>Guido Gonzalez</h1>
+      <p>3D Rigger & Technical Director</p>
+    </div>
+
+    <div class="section">
+      <h2>Profile</h2>
+      <p>
+        Animation and VFX student at La Salle – Universitat Ramon Llull,
+        passionate about character rigging and production pipelines.
+        Skilled in Maya rigging with experience in student productions to build
+        efficient, animator-friendly rigs. Strong background in Python scripting,
+        tool creation, and workflow optimization. Enthusiastic about technical
+        challenges and continuous learning.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Work Experience</h2>
+      <ul>
+        <li><strong>Character TD and Scripts Intern</strong> – La Salle URL (Sept 2025 – Present)<br>
+          Assisted faculty in teaching advanced character rigging systems and animation-oriented scripting to upper-year students.
+          Developed Python tools to streamline rig creation, automate repetitive tasks, and improve workflow efficiency.
+          Helped define a standardized production pipeline using Prism Pipeline and supported complex rig setups.
+        </li>
+        <li><strong>Rigging TD, Pipeline and Scripts Intern</strong> – La Salle URL (Mar 2025 – Jul 2025)<br>
+          Assisted in teaching core rigging systems to students, established standardized pipelines for projects, and provided technical troubleshooting support.
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Project Experience</h2>
+      <ul>
+        <li><strong><a href="https://youtu.be/YUHB5XICiPk" target="_blank" rel="noopener noreferrer" style="color:#ffffff; font-weight:700;">Out Cold</a>
+
+        </strong> – University project, La Salle URL (2025)<br> 
+          Rigging Lead for a short film, responsible for designing complex character rigs with advanced deformation systems. 
+          Developed multiple humanoid and quadruped rig variations to meet diverse animation requirements. 
+          Created custom Python tools to automate rigging tasks and streamline animator workflows. 
+        </li> 
+        <li><strong><a href="https://youtu.be/22wtODfVFXw" target="_blank" rel="noopener noreferrer" style="color:#ffffff; font-weight:700;">Davi</a>
+        </strong> – University project, La Salle URL (2025)<br>
+          Rigging Lead for a short film, developing several humanoid rigs featuring facial systems and secondary motion setups. 
+          Enhanced rigging efficiency and consistency across different DCCs through Python-based automation. 
+          Supervised a small team of riggers, ensuring technical quality and delivery within tight production timelines. 
+        </li> 
+        <li><strong><a href="https://youtu.be/T3o028TpqZ8" target="_blank" rel="noopener noreferrer" style="color:#ffffff; font-weight:700;">Vampire Blues</a>
+        </strong> – University project, La Salle URL (2025)<br>
+          Responsible for the entire rigging pipeline of a short film, including characters and props. 
+          Developed a modular facial rig system enabling expressive performance and efficient lip-sync workflows. 
+          Built Python tools that integrated the facial system across multiple characters, allowing fast iterations and meeting project deadlines.
+        </li>
+      </ul>
+    </div>
+
+    <div class="two-column">
+      <div>
+        <h2>Education</h2>
+        <ul>
+          <li><strong>Bachelor of Animation and VFX</strong> – La Salle Universitat Ramon Llull (2022 – Present)</li>
+          <li><strong>Bachelor’s Degree in Multimedia Engineering</strong> – La Salle Universitat Ramon Llull (2021 – 2022)</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Skills</h2>
+        <ul>
+          <li>Rigging</li>
+          <li>Python Scripting</li>
+          <li>Pipeline Development</li>
+          <li>Tool Creation</li>
+          <li>Workflow Optimization</li>
+          <li>Critical Thinking & Team Collaboration</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="two-column">
+      <div>
+        <h2>Languages</h2>
+        <ul>
+          <li>Spanish – Native</li>
+          <li>Catalan – Native</li>
+          <li>English – Fluent</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li>📞 +34 633 600 986</li>
+            <li style="color:#fff; font-weight:700;">
+            📧 <a href="mailto:guidogoca@gmail.com" style="color:inherit; font-weight:700; text-decoration:underline;">E-mail contact</a>
+            </li>
+            <li style="color:#fff; font-weight:700;">
+            [in] <a href="https://www.linkedin.com/in/guidogonzalezc/" style="color:inherit; font-weight:700; text-decoration:underline;" target="_blank" rel="noopener">LinkedIn</a>
+            </li>
+          <li>📍 Barcelona, Spain</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

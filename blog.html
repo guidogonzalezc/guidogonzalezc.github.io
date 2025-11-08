@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World - Blog</title>
+  <meta name="description" content="A space where Guido Gonzalez shares insights, tools, and discoveries about rigging and Maya." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+
+  <style>
+    /* === Base Styles & Background Animation === */
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+      line-height: 1.6;
+      background-image: url('assets/bg.jpg');
+      background-attachment: fixed;
+      background-position: center;
+      animation: subtleBackground 20s ease-in-out infinite alternate;
+    }
+
+
+    /* === Navigation === */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 20px 0;
+      background-color: transparent;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 400;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #ffffff;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    nav a.active {
+      color: #696969;
+    }
+
+    /* === Main Content === */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      text-align: center;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease forwards 0.4s;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1s ease forwards;
+      position: relative;
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: #696969;
+      animation: growLine 1s ease forwards;
+    }
+
+    p {
+      color: #ccc;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeInUp 1.2s ease forwards 0.8s;
+    }
+
+    /* === Link Hover Glow === */
+    a[href^="mailto"], a[href^="https"] {
+      position: relative;
+    }
+
+    a[href^="mailto"]:hover, a[href^="https"]:hover {
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff;
+      transition: all 0.3s ease;
+    }
+
+    /* === Animations === */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes growLine {
+      from { width: 0; opacity: 0; }
+      to { width: 60px; opacity: 1; }
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="./index.html">HOME</a>
+    <a href="./about.html">ABOUT ME</a>
+    <a href="./blog.html" class="active">BLOG</a>
+  </nav>
+
+  <!-- Main Section -->
+  <main>
+    <h1>Hello World</h1>
+    <p>
+      Welcome to my space, here I’ll share examples, experiments, and interesting things I find about rigging, Maya, and technical art.
+      This page will grow as I continue exploring tools, workflows, and techniques that bridge the gap between creativity and technical precision.
+    </p>
+  </main>   
+</body>
+</html>
