@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dragon Wings Automation - Guido Gonzalez</title>
+  <meta name="description" content="A technical breakdown of a dragon wing rig using Maya Python API, Matrix nodes, and UV Pins." />
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* === Base Variables === */
+    :root {
+      --bg-color: #050505;
+      --text-color: #e0e0e0;
+      --code-bg: #111;
+      --accent: #14c700;
+      --border: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.8;
+      background-image: url('../assets/bg.jpg');
+      background-attachment: fixed;
+    }
+
+    /* === Nav === */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 30px 0;
+      border-bottom: 1px solid #1a1a1a;
+      background: rgba(5,5,5,0.8);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a { text-decoration: none; color: #888; transition: color 0.3s; font-size: 0.9rem;}
+    nav a:hover { color: #fff; }
+
+    /* === Layout === */
+    .article-wrapper {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 4rem 20px;
+    }
+
+    /* === Header === */
+    .post-header {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'Clash Display', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin: 1rem 0;
+      color: #fff;
+    }
+
+    .tags {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid rgba(20, 199, 0, 0.2);
+    }
+
+    /* === Content Typography === */
+    h2 {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 2rem;
+      margin-top: 4rem;
+      margin-bottom: 1.5rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    h2::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #ccc;
+      margin-top: 2.5rem;
+    }
+
+    p { color: #b0b0b0; font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+    ul { color: #b0b0b0; margin-bottom: 2rem; }
+    li { margin-bottom: 0.5rem; }
+
+    /* === Code Blocks === */
+    pre {
+      background: var(--code-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    pre::before {
+      content: 'PYTHON';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #222;
+      color: #666;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-bottom-left-radius: 8px;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #d4d4d4;
+    }
+
+    /* Syntax Highlighting Simulation */
+    .k { color: #c678dd; } /* Keyword */
+    .f { color: #61afef; } /* Function */
+    .s { color: #98c379; } /* String */
+    .c { color: #5c6370; font-style: italic; } /* Comment */
+    .n { color: #d19a66; } /* Number */
+    .o { color: #56b6c2; } /* Operator/Matrix */
+
+    /* === Images === */
+    img {
+      width: 100%;
+      border-radius: 8px;
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="../index.html">HOME</a>
+    <a href="../about.html">ABOUT ME</a>
+    <a href="../blog.html" class="active">BLOG</a>
+  </nav>
+
+  <article class="article-wrapper">
+    
+    <header class="post-header">
+      <div class="tags">
+        <span class="tag">MAYA API</span>
+        <span class="tag">PYTHON</span>
+        <span class="tag">RIGGING</span>
+      </div>
+      <h1>Automated Dragon Wing System</h1>
+      <p style="font-size: 1.2rem; color: #888;">
+        Building a modular, matrix-driven wing rig with automated membrane stretching and UV-based attachments.
+      </p>
+    </header>
+
+    <section>
+      <p>
+        Rigging organic wings is one of the most complex tasks in creature setups. The challenge lies in creating a system that folds naturally, preserves volume, and remains performant. For this dragon project, I developed a modular Python tool that generates the entire setup automatically.
+      </p>
+      <p>
+        The core of the system relies on <strong>Matrix Nodes</strong> (`blendMatrix`, `aimMatrix`, `pickMatrix`) rather than traditional constraints, ensuring a robust and evaluation-friendly rig.
+      </p>
+      
+      <img src="assets/dragon_preview.jpg" alt="Dragon Wing Viewport" onerror="this.style.display='none'">
+    </section>
+
+    <section>
+      <h2>1. The Matrix-Driven Phalanges</h2>
+      <p>
+        The finger structure (phalanges) needs to handle both FK and IK logic. Instead of heavy orient constraints, I utilized `aimMatrix` nodes to drive the orientation of the guides and joints. This allows for stable aiming vectors that don't flip easily.
+      </p>
+      <p>
+        In the `dragon_falanges.py` module, the `make` function iterates through guide positions and establishes the matrix relationships:
+      </p>
+
+      <pre><code><span class="c"># dragon_falanges.py snippet</span>
+<span class="k">for</span> i <span class="k">in</span> range(len(self.guides)-1):
+    aim_matrix = cmds.createNode(<span class="s">"aimMatrix"</span>, name=f<span class="s">"{self.side}_{name}_AMX"</span>)
+
+    <span class="c"># Setup Primary and Secondary Axis</span>
+    cmds.setAttr(aim_matrix + <span class="s">".primaryInputAxis"</span>, *self.primary_aim_vector, type=<span class="s">"double3"</span>)
+    cmds.setAttr(aim_matrix + <span class="s">".secondaryInputAxis"</span>, *self.secondary_aim_vector, type=<span class="s">"double3"</span>)
+    
+    <span class="c"># Connect Matrices directly (No Constraints)</span>
+    cmds.connectAttr(order[i][0] + <span class="s">".worldMatrix[0]"</span>, aim_matrix + <span class="s">".inputMatrix"</span>)
+    cmds.connectAttr(order[i][1] + <span class="s">".primaryTargetMatrix"</span>, aim_matrix + <span class="s">".primaryTargetMatrix"</span>)</code></pre>
+    
+      <h3>FK / IK Switching</h3>
+      <p>
+        To handle the switch, I used `blendMatrix` nodes. This blends the World Matrix of the FK chain and the IK chain directly, feeding the result into the skinning joints. This method is cleaner than blending individual translate/rotate/scale channels.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. The Membrane (Webbing) Logic</h2>
+      <p>
+        The most difficult part of a wing is the skin between fingers. It needs to stretch linearly when fingers open and relax when they close.
+      </p>
+      <p>
+        I solved this in `membran_module.py` by calculating the weighted center between two fingers using `wtAddMatrix`. This creates a virtual "mid-point" that stays perfectly centered regardless of the hierarchy.
+      </p>
+
+      <pre><code><span class="c"># membran_module.py - Calculating the mid-point</span>
+mid_position = cmds.createNode(<span class="s">"wtAddMatrix"</span>, name=f<span class="s">"..._WTM"</span>)
+
+<span class="c"># Connect both finger matrices</span>
+cmds.connectAttr(joint_one + <span class="s">".worldMatrix[0]"</span>, mid_position + <span class="s">".wtMatrix[0].matrixIn"</span>)
+cmds.connectAttr(joint_two + <span class="s">".worldMatrix[0]"</span>, mid_position + <span class="s">".wtMatrix[1].matrixIn"</span>)
+
+<span class="c"># Weight them equally (0.5) to find the center</span>
+cmds.setAttr(mid_position + <span class="s">".wtMatrix[0].weightIn"</span>, <span class="n">0.5</span>)
+cmds.setAttr(mid_position + <span class="s">".wtMatrix[1].weightIn"</span>, <span class="n">0.5</span>)</code></pre>
+    </section>
+
+    <section>
+      <h2>3. Surface Attachment with UV Pins</h2>
+      <p>
+        To drive the actual geometry, I generated a NURBS surface based on the finger positions. Instead of using `pointOnSurfaceInfo` nodes (which can be slow), I used Maya's **UV Pin** nodes.
+      </p>
+      <p>
+        This allows me to attach "Micro-Joints" to specific U/V coordinates on the membrane. As the underlying simulation or rig moves the surface, the joints follow perfectly in tangent space.
+      </p>
+
+      <pre><code><span class="c"># Generating UV Pins dynamically</span>
+<span class="k">for</span> i <span class="k">in</span> range(u_row):
+    <span class="k">for</span> index <span class="k">in</span> range(v_row):
+        
+        <span class="c"># Normalize the coordinates based on row count</span>
+        u_val = float(i) / (u_row - <span class="n">1</span>)
+        v_val = float(index) / (v_row - <span class="n">1</span>)
+
+        cmds.setAttr(f<span class="s">"{uv_pin}.coordinate[{count}].coordinateU"</span>, u_val)
+        cmds.setAttr(f<span class="s">"{uv_pin}.coordinate[{count}].coordinateV"</span>, v_val)
+        
+        <span class="c"># Connect to joint offset</span>
+        cmds.connectAttr(f<span class="s">"{uv_pin}.outputMatrix[{count}]"</span>, f<span class="s">"{joint}.offsetParentMatrix"</span>)</code></pre>
+    </section>
+
+    <section>
+      <h2>Conclusion</h2>
+      <p>
+        By scripting this process, I can iterate on the resolution of the wing (number of micro-joints) without manually rebuilding constraints. The use of Matrix nodes ensures the rig runs at high frame rates, even with the complex deformation layers.
+      </p>
+      <p>
+        Future improvements could include adding a collision layer to the membrane using simple Euclidean distance checks within the Python script to drive blendShapes.
+      </p>
+    </section>
+
+  </article>
+</body>
+</html>
