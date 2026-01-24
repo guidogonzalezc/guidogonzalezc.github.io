@@ -3,34 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World - Blog</title>
-  <meta name="description" content="A space where Guido Gonzalez shares insights, tools, and discoveries about rigging and Maya." />
+  <title>Blog - Guido Gonzalez</title>
+  <meta name="description" content="Technical breakdowns, rigging tools, and Maya workflows by Guido Gonzalez." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap" rel="stylesheet">
 
   <style>
-    /* === Base Styles & Background Animation === */
+    /* === Base Styles === */
+    :root {
+      --bg-color: #050505;
+      --card-bg: #111111;
+      --text-main: #ffffff;
+      --text-muted: #888;
+      --border-color: #222;
+      --accent-green: #14c700;
+      --accent-blue: #009dff;
+    }
+
     body {
       margin: 0;
       font-family: "Inter", sans-serif;
-      background-color: #0a0a0a;
-      color: #fff;
+      background-color: var(--bg-color);
+      color: var(--text-main);
       line-height: 1.6;
       background-image: url('assets/bg.jpg');
       background-attachment: fixed;
       background-position: center;
-      animation: subtleBackground 20s ease-in-out infinite alternate;
     }
-
 
     /* === Navigation === */
     nav {
       display: flex;
       justify-content: center;
       gap: 2rem;
-      padding: 20px 0;
-      background-color: transparent;
-      opacity: 0;
+      padding: 30px 0;
       animation: fadeIn 1.2s ease forwards;
     }
 
@@ -39,6 +46,8 @@
       color: inherit;
       font-weight: 400;
       position: relative;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
       transition: color 0.3s ease;
     }
 
@@ -48,116 +57,196 @@
       bottom: -4px;
       left: 0;
       width: 0%;
-      height: 2px;
+      height: 1px;
       background: #ffffff;
       transition: width 0.3s ease;
     }
 
-    nav a:hover::after {
-      width: 100%;
-    }
+    nav a:hover::after { width: 100%; }
+    nav a.active { color: #696969; }
 
-    nav a:hover {
-      color: #ffffff;
-    }
-
-    nav a.active {
-      color: #696969;
-    }
-
-    /* === Main Content === */
+    /* === Header === */
     main {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 6rem 2rem;
-      text-align: center;
+      padding: 4rem 2rem;
       opacity: 0;
       animation: fadeInUp 1.5s ease forwards 0.4s;
     }
 
+    .blog-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
     h1 {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      animation: fadeIn 1s ease forwards;
-      position: relative;
+      font-family: 'Clash Display', sans-serif;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      letter-spacing: -1px;
     }
 
-    h1::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 2px;
-      background: #696969;
-      animation: growLine 1s ease forwards;
-    }
-
-    p {
-      color: #ccc;
-      font-size: 1.1rem;
-      max-width: 700px;
+    .subtitle {
+      color: var(--text-muted);
+      max-width: 500px;
       margin: 0 auto;
-      opacity: 0;
-      animation: fadeInUp 1.2s ease forwards 0.8s;
+      font-size: 1.1rem;
     }
 
-    /* === Link Hover Glow === */
-    a[href^="mailto"], a[href^="https"] {
+    /* === Grid === */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    /* === Card Design === */
+    .blog-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
       position: relative;
     }
 
-    a[href^="mailto"]:hover, a[href^="https"]:hover {
-      color: #00ffff;
-      text-shadow: 0 0 5px #00ffff;
-      transition: all 0.3s ease;
+    .blog-card:hover {
+      transform: translateY(-8px);
+      border-color: #444;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    .card-image-wrapper {
+      width: 100%;
+      height: 220px;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+
+    .card-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      opacity: 0.8;
+    }
+
+    .blog-card:hover .card-image-wrapper img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .card-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .cat-python { color: var(--accent-green); }
+    .cat-cpp { color: var(--accent-blue); }
+
+    .card-title {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 1.5rem;
+      margin: 0 0 1rem 0;
+      line-height: 1.2;
+    }
+
+    .card-excerpt {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #555;
+      border-top: 1px solid #222;
+      padding-top: 1rem;
     }
 
     /* === Animations === */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes growLine {
-      from { width: 0; opacity: 0; }
-      to { width: 60px; opacity: 1; }
-    }
-
-    /* === Responsive === */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      p {
-        font-size: 1rem;
-      }
+      h1 { font-size: 2.5rem; }
+      .blog-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Navigation -->
   <nav>
     <a href="./index.html">HOME</a>
     <a href="./about.html">ABOUT ME</a>
     <a href="./blog.html" class="active">BLOG</a>
   </nav>
 
-  <!-- Main Section -->
   <main>
-    <h1>Hello World</h1>
-    <p>
-      Welcome to my space, here I’ll share examples, experiments, and interesting things I find about rigging, Maya, and technical art.
-      This page will grow as I continue exploring tools, workflows, and techniques that bridge the gap between creativity and technical precision.
-    </p>
-  </main>   
+    <div class="blog-header">
+      <h1>Engineering Art</h1>
+      <p class="subtitle">
+        A collection of rigging breakdowns, Python tools, and pipeline solutions.
+      </p>
+    </div>
+
+    <div class="blog-grid">
+      
+      <a href="./posts/dragon_wings.html" class="blog-card">
+        <div class="card-image-wrapper">
+          <img src="assets/wings_image.png" alt="Dragon Wings Rig" onerror="this.src='https://images.unsplash.com/photo-1615818384166-4c40590c6c2b?q=80&w=2574&auto=format&fit=crop'">
+        </div>
+        <div class="card-content">
+          <span class="card-category cat-python">Python / Rigging</span>
+          <h2 class="card-title">Automated Dragon Wing System</h2>
+          <p class="card-excerpt">
+            Developing a modular wing rig using Matrix nodes, UV Pins, and Python to handle complex membrane folding and stretching automatically.
+          </p>
+          <div class="card-footer">
+            <span>Jan 24, 2026</span>
+            <span>Read Breakdown →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="./posts/skincluster_manager.html" class="blog-card">
+        <div class="card-image-wrapper">
+             <img src="assets/skinclusterio.png" alt="Skin Weights" onerror="this.src='https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop'">
+        </div>
+        <div class="card-content">
+          <span class="card-category cat-cpp">Maya API / ToolDev</span>
+          <h2 class="card-title">Mastering Deformation Layers</h2>
+          <p class="card-excerpt">
+            A deep dive into high-performance skin weight export using OpenMaya, handling sparse data compression, and managing deformation stacks.
+          </p>
+          <div class="card-footer">
+            <span>Feb 10, 2026</span>
+            <span>Read Breakdown →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </main>
 </body>
 </html>
