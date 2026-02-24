@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maya Deformation Layers & Skin Weights API - Guido Gonzalez</title>
+  <meta name="description" content="A technical breakdown on managing Maya deformation layers, optimizing skin weights with OpenMaya API, and sparse JSON data for rigging pipelines." />
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* === Base Variables === */
+    :root {
+      --bg-color: #050505;
+      --text-color: #e0e0e0;
+      --code-bg: #111;
+      --accent: #009dff;
+      --border: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.8;
+      background-image: url('../assets/bg.jpg');
+      background-attachment: fixed;
+    }
+
+    /* === Nav === */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 30px 0;
+      border-bottom: 1px solid #1a1a1a;
+      background: rgba(5,5,5,0.8);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a { text-decoration: none; color: #888; transition: color 0.3s; font-size: 0.9rem;}
+    nav a:hover { color: #fff; }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background-color: rgba(0, 157, 255, 0.05);
+      color: #009dff;
+      padding: 16px 35px;
+      border: 1px solid rgba(0, 157, 255, 0.4);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .download-btn:hover {
+      background-color: rgba(0, 157, 255, 0.15);
+      border-color: #009dff;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 157, 255, 0.2);
+    }
+
+    .download-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      transition: transform 0.3s ease;
+    }
+
+    .download-btn:hover svg {
+      transform: translateY(2px);
+    }
+
+
+    /* === Layout === */
+    .article-wrapper {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 4rem 20px;
+    }
+
+    /* === Header === */
+    .post-header {
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'Clash Display', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin: 1rem 0;
+      color: #fff;
+    }
+
+    .tags {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      background: rgba(0, 157, 255, 0.1);
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid rgba(0, 157, 255, 0.2);
+    }
+
+    /* === Content Typography === */
+    h2 {
+      font-family: 'Clash Display', sans-serif;
+      font-size: 2rem;
+      margin-top: 4rem;
+      margin-bottom: 1.5rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    h2::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #ccc;
+      margin-top: 2.5rem;
+    }
+
+    p { color: #b0b0b0; font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+    /* === Code Blocks === */
+    pre {
+      background: var(--code-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+      margin: 2rem 0;
+    }
+
+    pre::before {
+      content: 'PYTHON API';
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #222;
+      color: #666;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-bottom-left-radius: 8px;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: #d4d4d4;
+    }
+
+    /* Syntax Highlighting Simulation */
+    .k { color: #c678dd; } /* Keyword */
+    .f { color: #61afef; } /* Function */
+    .s { color: #98c379; } /* String */
+    .c { color: #5c6370; font-style: italic; } /* Comment */
+    .n { color: #d19a66; } /* Number */
+    .o { color: #56b6c2; } /* Operator */
+    .cl { color: #e5c07b; } /* Class */
+
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="../index.html">HOME</a>
+    <a href="../about.html">ABOUT ME</a>
+    <a href="../blog.html" class="active">BLOG</a>
+  </nav>
+
+  <article class="article-wrapper">
+    
+    <header class="post-header">
+      <div class="tags">
+        <span class="tag">OPENMAYA</span>
+        <span class="tag">PIPELINE</span>
+        <span class="tag">TOOL DEV</span>
+      </div>
+      <h1>Mastering Deformation Layers & Skin I/O</h1>
+      <p style="font-size: 1.2rem; color: #888;">
+        Building a high-performance, zero-dependency Skin IO tool: tackling API component types, sparse JSON data, and managing complex deformation stacks for rapid autorig iteration.
+      </p>
+    </header>
+
+    <section>
+      <h2>The Motivation: Fast Iteration Without Dependencies</h2>
+      <p>
+        While developing a custom autorig for my University Final Degree Projects, I hit a major bottleneck: iteration speed. Every time the rig's skeleton updated or proportions changed, I had to manually transfer skin weights. 
+      </p>
+      <p>
+        Relying on excellent external plugins like <em>ngSkinTools</em> or <em>mGear</em> to handle this wasn't an option for me. I wanted a native, zero-dependency pipeline tool that could instantly export and import complex deformation stacks across different rig versions without manual intervention. I needed a tool that was lightning-fast, highly optimized, and fully integrated into my own codebase. This led to the creation of my custom <code>SkinIO</code> manager.
+      </p>
+    </section>
+
+    <section>
+      <h2>1. The Performance Gap: cmds vs OpenMaya</h2>
+      <p>
+        When dealing with a dense character mesh of 50,000 vertices and 100 joints, you are iterating through 5 million potential weight values. Using standard <code>maya.cmds.skinPercent</code> to query or set these values evaluates them as strings through Maya's command engine, which creates an enormous bottleneck.
+      </p>
+      <p>
+        By switching to Maya's API 2.0 (<code>maya.api.OpenMaya</code>), the tool accesses the raw memory array of weights directly. Using <code>MFnSkinCluster.getWeights()</code>, querying millions of weights happens in a fraction of a second.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Handling Versatile Geometry (Meshes, Curves, Surfaces)</h2>
+      <p>
+        A robust autorig doesn't just skin polygons. It skins NURBS curves for facial ribbons, and NURBS surfaces for wing membranes or sliding setups. Generalizing the tool meant understanding how the API handles different geometric components.
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        Meshes and Curves are straightforward—they use a single index (vertex 0, 1, 2...). I used <code>MFnSingleIndexedComponent</code> for <code>kMeshVertComponent</code> and <code>kCurveCVComponent</code>. However, NURBS Surfaces are a grid, meaning they are double-indexed (U and V). To handle this gracefully, I dynamically calculate the total point count (<code>numCVsInU * numCVsInV</code>) and create an <code>MFnDoubleIndexedComponent</code> specifically for <code>kSurfaceCVComponent</code>.
+      </p>
+
+      <pre><code><span class="c"># Handling different API component types based on geometry</span>
+<span class="k">def</span> <span class="f">_get_geometry_components</span>(<span class="n">self</span>, <span class="n">dag_path</span>):
+    <span class="n">component</span> <span class="o">=</span> <span class="k">None</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">0</span>
+    
+    <span class="k">if</span> <span class="n">dag_path</span>.<span class="f">hasFn</span>(<span class="cl">om</span>.<span class="cl">MFn</span>.<span class="n">kMesh</span>):
+        <span class="c"># Single Indexed Component for Meshes</span>
+        <span class="n">fn_mesh</span> <span class="o">=</span> <span class="cl">om</span>.<span class="cl">MFnMesh</span>(<span class="n">dag_path</span>)
+        <span class="n">count</span> <span class="o">=</span> <span class="n">fn_mesh</span>.<span class="n">numVertices</span>
+        <span class="n">fn_single</span> <span class="o">=</span> <span class="cl">om</span>.<span class="cl">MFnSingleIndexedComponent</span>()
+        <span class="n">component</span> <span class="o">=</span> <span class="n">fn_single</span>.<span class="f">create</span>(<span class="cl">om</span>.<span class="cl">MFn</span>.<span class="n">kMeshVertComponent</span>)
+        <span class="n">fn_single</span>.<span class="f">setCompleteData</span>(<span class="n">count</span>)
+        
+    <span class="k">elif</span> <span class="n">dag_path</span>.<span class="f">hasFn</span>(<span class="cl">om</span>.<span class="cl">MFn</span>.<span class="n">kNurbsSurface</span>):
+        <span class="c"># Double Indexed Component for Surfaces (U, V)</span>
+        <span class="n">fn_surf</span> <span class="o">=</span> <span class="cl">om</span>.<span class="cl">MFnNurbsSurface</span>(<span class="n">dag_path</span>)
+        <span class="n">num_u</span> <span class="o">=</span> <span class="n">fn_surf</span>.<span class="n">numCVsInU</span>
+        <span class="n">num_v</span> <span class="o">=</span> <span class="n">fn_surf</span>.<span class="n">numCVsInV</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">num_u</span> <span class="o">*</span> <span class="n">num_v</span>
+        
+        <span class="n">fn_double</span> <span class="o">=</span> <span class="cl">om</span>.<span class="cl">MFnDoubleIndexedComponent</span>()
+        <span class="n">component</span> <span class="o">=</span> <span class="n">fn_double</span>.<span class="f">create</span>(<span class="cl">om</span>.<span class="cl">MFn</span>.<span class="n">kSurfaceCVComponent</span>)
+        <span class="n">fn_double</span>.<span class="f">setCompleteData</span>(<span class="n">num_u</span>, <span class="n">num_v</span>)
+        
+    <span class="k">return</span> <span class="n">count</span>, <span class="n">component</span></code></pre>
+    </section>
+
+    <section>
+      <h2>3. Sparse Data Optimization</h2>
+      <p>
+        A standard character mesh is "sparse". If a skeleton has 200 joints, a single vertex on the pinky toe is only influenced by 1 or 2 of them. Storing <code>0.0</code> weights for the other 198 joints across thousands of vertices creates massive, slow-to-read files.
+      </p>
+      <p>
+        
+      </p>
+      <p>
+        To fix this, my exporter applies a strict tolerance threshold (<code>1e-5</code>). As it slices the flattened API array using a stride based on the influence count, it aggressively filters out negligible weights. This sparse dictionary mapping reduces file sizes by up to 90% compared to raw dumps.
+      </p>
+
+      <pre><code><span class="c"># Extracting sparse data using a stride and tolerance</span>
+<span class="n">flat_weights</span> <span class="o">=</span> <span class="cl">list</span>(<span class="n">weights_marray</span>)
+<span class="n">sparse_weights</span> <span class="o">=</span> {}
+<span class="n">stride</span> <span class="o">=</span> <span class="cl">len</span>(<span class="n">inf_names</span>)
+
+<span class="k">for</span> <span class="n">inf_idx</span>, <span class="n">inf_name</span> <span class="k">in</span> <span class="f">enumerate</span>(<span class="n">inf_names</span>):
+    <span class="c"># Slice the flat array for this specific influence</span>
+    <span class="n">inf_vals</span> <span class="o">=</span> <span class="n">flat_weights</span>[<span class="n">inf_idx</span>::<span class="n">stride</span>]
+    
+    <span class="c"># Keep only indices and weights above the tolerance (1e-5)</span>
+    <span class="n">j_indices</span> <span class="o">=</span> [<span class="n">i</span> <span class="k">for</span> <span class="n">i</span>, <span class="n">v</span> <span class="k">in</span> <span class="f">enumerate</span>(<span class="n">inf_vals</span>) <span class="k">if</span> <span class="n">v</span> <span class="o">></span> <span class="n">self</span>.<span class="n">tolerance</span>]
+    <span class="n">j_weights</span> <span class="o">=</span> [<span class="f">round</span>(<span class="n">inf_vals</span>[<span class="n">i</span>], <span class="n">5</span>) <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">j_indices</span>]
+
+    <span class="k">if</span> <span class="n">j_indices</span>:
+        <span class="n">sparse_weights</span>[<span class="n">inf_name</span>] <span class="o">=</span> {<span class="s">"ix"</span>: <span class="n">j_indices</span>, <span class="s">"vw"</span>: <span class="n">j_weights</span>}</code></pre>
+    </section>
+
+    <section>
+      <h2>4. JSON (ASCII) over Binary</h2>
+      <p>
+        A common debate is whether to serialize data as Binary (fast, small) or ASCII (JSON). I specifically chose JSON for flexibility and debugging. 
+      </p>
+      <p>
+        If topology slightly changes during production, a binary file might crash or corrupt the load. With an ASCII JSON file, I can easily write a secondary script to read the JSON, map the old vertex indices to the new topology using proximity algorithms, and inject the patched data safely. To offset the larger file size inherent to ASCII, I strip out unnecessary whitespace during the dump using <code>separators=(',', ':')</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Maintaining the Deformation Stack</h2>
+      <p>
+        In complex rigs, a single SkinCluster is rarely enough. We stack base skins and corrective skins. If these layers are applied in the wrong order upon import, the rig breaks.
+      </p>
+      <p>
+        The tool iterates through the node history using <code>cmds.listHistory</code> to capture the exact stack order. During import, after all SkinClusters are rebuilt, it actively reorders them using <code>cmds.reorderDeformers</code> to guarantee the original deformation logic remains intact.
+      </p>
+    </section>
+
+    <section>
+      <h2>Conclusion</h2>
+      <p>
+        By leveraging OpenMaya, we get the speed of C++ under the hood while maintaining the flexibility of Python. Building this custom tool gave my autorig the independence and iteration speed it desperately needed for my final degree project—proving that sometimes, building your own foundational pipeline tools is the most effective way forward.
+      </p>
+    </section>
+
+  </article>
+
+  <div style="text-align: center; margin: 5rem 0 2rem 0;">
+    <a href="scripts/skincluster_manager.py" download="skincluster_manager.py" class="download-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      Download Python Script
+    </a>
+    <p style="font-size: 0.85rem; color: #666; margin-top: 15px;">Free to use and modify for your own pipelines.</p>
+  </div>
+</body>
+</html>
