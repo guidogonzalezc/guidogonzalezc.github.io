@@ -1,252 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="black">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog - Guido Gonzalez</title>
-  <meta name="description" content="Technical breakdowns, rigging tools, and Maya workflows by Guido Gonzalez." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap" rel="stylesheet">
-
-  <style>
-    /* === Base Styles === */
-    :root {
-      --bg-color: #050505;
-      --card-bg: #111111;
-      --text-main: #ffffff;
-      --text-muted: #888;
-      --border-color: #222;
-      --accent-green: #14c700;
-      --accent-blue: #009dff;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Inter", sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      line-height: 1.6;
-      background-image: url('assets/bg.jpg');
-      background-attachment: fixed;
-      background-position: center;
-    }
-
-    /* === Navigation === */
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 30px 0;
-      animation: fadeIn 1.2s ease forwards;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: inherit;
-      font-weight: 400;
-      position: relative;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      transition: color 0.3s ease;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0%;
-      height: 1px;
-      background: #ffffff;
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after { width: 100%; }
-    nav a.active { color: #696969; }
-
-    /* === Header === */
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-      opacity: 0;
-      animation: fadeInUp 1.5s ease forwards 0.4s;
-    }
-
-    .blog-header {
-      text-align: center;
-      margin-bottom: 5rem;
-    }
-
-    h1 {
-      font-family: 'Clash Display', sans-serif;
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-      letter-spacing: -1px;
-    }
-
-    .subtitle {
-      color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-    }
-
-    /* === Grid === */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    /* === Card Design === */
-    .blog-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .blog-card:hover {
-      transform: translateY(-8px);
-      border-color: #444;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    }
-
-    .card-image-wrapper {
-      width: 100%;
-      height: 220px;
-      background: #1a1a1a;
-      overflow: hidden;
-    }
-
-    .card-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-      opacity: 0.8;
-    }
-
-    .blog-card:hover .card-image-wrapper img {
-      transform: scale(1.05);
-      opacity: 1;
-    }
-
-    .card-content {
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .card-category {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-
-    .cat-python { color: var(--accent-green); }
-    .cat-cpp { color: var(--accent-blue); }
-
-    .card-title {
-      font-family: 'Clash Display', sans-serif;
-      font-size: 1.5rem;
-      margin: 0 0 1rem 0;
-      line-height: 1.2;
-    }
-
-    .card-excerpt {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-
-    .card-footer {
-      margin-top: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      color: #555;
-      border-top: 1px solid #222;
-      padding-top: 1rem;
-    }
-
-    /* === Animations === */
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 2.5rem; }
-      .blog-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Guido Gonzalez</title>
+<meta name="description" content="Rigging breakdowns, Python tools and pipeline solutions — written as I build them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
 </head>
-
 <body>
-  <nav>
-    <a href="./index.html">HOME</a>
-    <a href="./about.html">ABOUT ME</a>
-    <a href="./blog.html" class="active">BLOG</a>
+
+<!-- Social rail -->
+<div class="social-rail">
+  <a href="#" target="_blank" rel="noopener">IMDB</a>
+  <a href="https://youtu.be/AxYoezjpZxg" target="_blank" rel="noopener">YOUTUBE</a>
+  <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
+  <a href="mailto:guidogoca@gmail.com">EMAIL</a>
+</div>
+
+<!-- Dark header -->
+<div class="sec sec-hero">
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">GG — RIGGING TD</a>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a class="active" href="blog.html">BLOG</a>
+      <a href="about.html">ABOUT ME</a>
+      <a href="contact.html">CONTACT</a>
+      <button class="theme-toggle" type="button">● BLACK</button>
+    </div>
   </nav>
+  <header class="hero" style="padding-bottom:56px">
+    <p class="kicker reveal">THE BLOG</p>
+    <h1 class="reveal" data-delay="80" style="font-size:clamp(44px,6.5vw,84px)">Engineering art.</h1>
+    <p class="lead reveal" data-delay="160">Rigging breakdowns, Python tools and pipeline solutions — written as I build them.</p>
+  </header>
+</div>
 
-  <main>
-    <div class="blog-header">
-      <h1>Engineering Art</h1>
-      <p class="subtitle">
-        A collection of rigging breakdowns, Python tools, and pipeline solutions.
-      </p>
+<!-- Light body -->
+<div class="sec sec-body" style="padding:48px 6vw">
+  <div class="container">
+
+    <div class="filters reveal">
+      <button class="active" data-filter="ALL" type="button">ALL</button>
+      <button data-filter="RIGGING" type="button">RIGGING</button>
+      <button data-filter="MAYA API" type="button">MAYA API</button>
+      <button data-filter="TOOLS" type="button">TOOLS</button>
     </div>
 
-    <div class="blog-grid">
-      
-      <a href="./posts/dragon_wings.html" class="blog-card">
-        <div class="card-image-wrapper">
-          <img src="assets/wings_image.png" alt="Dragon Wings Rig" onerror="this.src='https://images.unsplash.com/photo-1615818384166-4c40590c6c2b?q=80&w=2574&auto=format&fit=crop'">
+    <a class="featured reveal" data-tag="MAYA API" href="posts/maya-deformation-layers-api.html">
+      <div class="thumb"><img src="assets/skinclusterio.png" alt="Skin weights tool"></div>
+      <div class="content">
+        <p class="card-cat">LATEST · MAYA API / TOOLDEV</p>
+        <h2>Mastering Deformation Layers with the Maya API</h2>
+        <p class="desc" style="margin-bottom:20px">High-performance skin weight export with OpenMaya: sparse data compression and managing the deformation stack.</p>
+        <div style="display:flex;justify-content:space-between;align-items:baseline" class="date">
+          <span>FEB 24, 2026 · 9 MIN</span><span style="color:var(--text)">READ →</span>
         </div>
-        <div class="card-content">
-          <span class="card-category cat-python">Python / Rigging</span>
-          <h2 class="card-title">Automated Dragon Wing System</h2>
-          <p class="card-excerpt">
-            Developing a modular wing rig using Matrix nodes, UV Pins, and Python to handle complex membrane folding and stretching automatically.
-          </p>
-          <div class="card-footer">
-            <span>Jan 2, 2026</span>
-            <span>Read Breakdown →</span>
-          </div>
-        </div>
-      </a>
+      </div>
+    </a>
 
-      <a href="./posts/maya-deformation-layers-api.html" class="blog-card">
-        <div class="card-image-wrapper">
-             <img src="assets/skinclusterio.png" alt="Skin Weights" onerror="this.src='https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2574&auto=format&fit=crop'">
+    <div class="row-list" style="margin-bottom:56px">
+      <a class="post-row reveal" data-tag="RIGGING" href="posts/dragon_wings.html">
+        <span class="date">JAN 2, 2026</span>
+        <div>
+          <h3>Automated Dragon Wing System</h3>
+          <p class="desc">Matrix nodes, UV pins and Python for automatic membrane folding.</p>
         </div>
-        <div class="card-content">
-          <span class="card-category cat-cpp">Maya API / ToolDev</span>
-          <h2 class="card-title">Mastering Deformation Layers</h2>
-          <p class="card-excerpt">
-            A deep dive into high-performance skin weight export using OpenMaya, handling sparse data compression, and managing deformation stacks.
-          </p>
-          <div class="card-footer">
-            <span>Feb 24, 2026</span>
-            <span>Read Breakdown →</span>
-          </div>
-        </div>
+        <span class="tag">RIGGING</span>
       </a>
-
+      <a class="post-row reveal" data-tag="MAYA API" href="posts/maya-deformation-layers-api.html">
+        <span class="date">FEB 24, 2026</span>
+        <div>
+          <h3>Mastering Deformation Layers with the Maya API</h3>
+          <p class="desc">Sparse weight data, compression, and the deformation stack.</p>
+        </div>
+        <span class="tag">MAYA API</span>
+      </a>
+      <a class="post-row reveal" data-tag="TOOLS" href="posts/maya-deformation-layers-api.html" style="border-bottom:1px solid var(--border)">
+        <span class="date">DEC 2025</span>
+        <div>
+          <h3>gcSkinclusterIO — download &amp; usage notes</h3>
+          <p class="desc">The full script and why OpenMaya beats cmds for weight I/O.</p>
+        </div>
+        <span class="tag">TOOLS</span>
+      </a>
     </div>
-  </main>
+
+    <footer class="footer">
+      <span>© 2026 GUIDO GONZALEZ</span>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
+        <a href="https://github.com/guidogonzalezc" target="_blank" rel="noopener">GITHUB</a>
+        <a href="mailto:guidogoca@gmail.com">EMAIL</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
 </body>
 </html>

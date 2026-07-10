@@ -1,423 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="black">
 <head>
-    <meta name="google-site-verification" content="npFz0nrunmdO-A8WTDBA9_av1s_XHqN-7TyNvuLAuH4" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guido Gonzalez - 3D Rigger</title>
-    <meta name="description" content="I’m a 3d rigger and technical director (td) student.">
-    
-    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700,500&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-color: #050505; 
-            --text-white: #ffffff;
-            --text-grey: #808080;
-            --border-color: #222222;
-            --accent-green: #14c700;
-            --accent-blue: #009dff;
-            --font-heading: 'Clash Display', sans-serif;
-            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-white);
-            font-family: var(--font-body);
-            font-size: 16px;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            background-image: url('assets/bg.jpg');
-        }
-
-        .container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: opacity 0.2s;
-        }
-
-        a:hover {
-            opacity: 0.7;
-        }
-
-        /* --- Navigation --- */
-        nav {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        padding: 20px 0;
-        background-color: transparent;
-        /* opacity: 0; */
-        animation: fadeIn 1.2s ease forwards;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: inherit;
-            font-weight: 400;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        nav a::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 0%;
-        height: 2px;
-        background: #ffffff;
-        transition: width 0.3s ease;
-        }
-
-        nav a:hover::after {
-        width: 100%;
-        }
-
-        nav a:hover {
-        color: #ffffff;
-        }
-
-        nav a.active {
-        color: #696969;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            text-align: center;
-            padding: 60px 0 40px;
-            overflow: hidden;
-        }
-
-        h1 {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: clamp(3rem, 15vw, 200px);
-            line-height: 0.8;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-        }
-
-        .hero-subtitle {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-grey);
-            margin-bottom: 60px;
-        }
-
-        /* --- Details Grid (UPDATED TO FLEXBOX) --- */
-        .details-grid {
-            /* Changed to Flex for better centering of variable items */
-            display: flex; 
-            justify-content: center; /* Centers the items horizontally */
-            
-            /* Constraints to keep it looking good */
-            max-width: 1000px; 
-            width: 100%;
-            margin: 0 auto; /* Pushes the block to the center of the page */
-            
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .detail-item {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            
-            /* Sizing control */
-            flex: 1; /* Makes them share available space equally */
-            min-width: 200px; /* Prevents them from getting too small */
-            max-width: 350px; /* Prevents them from getting too wide */
-            
-            border-right: 1px solid var(--border-color);
-        }
-
-        .detail-item:last-child {
-            border-right: none;
-        }
-
-        .icon-box {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 15px;
-        }
-
-        .detail-text strong {
-            display: block;
-            color: var(--text-white);
-            font-weight: normal;
-            font-family: var(--font-heading);
-        }
-
-        .detail-text span {
-            color: var(--text-grey);
-            font-size: 0.9rem;
-        }
-
-        /* --- Video Section --- */
-        .video-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 60px auto;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16 / 9;
-            background: #111;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* --- Software Skills --- */
-        .skills-section {
-            padding: 40px 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            background: transparent;
-            overflow: hidden;
-            width: 100%;
-            white-space: nowrap;
-        }
-
-        .skills-track {
-            display: inline-flex;
-            animation: marquee 20s linear infinite;
-            width: max-content;
-        }
-
-        .skills-track:hover {
-            animation-play-state: paused;
-        }
-
-        .skills-list {
-            display: flex;
-            gap: 60px;
-            padding-right: 60px;
-            list-style: none;
-        }
-
-        .skill-card {
-            width: 160px;
-            height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            background: transparent;
-            flex-shrink: 0;
-            transition: transform 0.2s;
-        }
-
-        .skill-card:hover {
-            transform: scale(1.05);
-            border-color: var(--text-white);
-            background-color: transparent;
-        }
-
-        .skill-card img {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* --- About Section --- */
-        .about-section {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .about-title {
-            font-family: var(--font-heading);
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            margin-bottom: 30px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.1;
-        }
-
-        .about-body {
-            color: var(--text-grey);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        /* --- Footer --- */
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: var(--text-grey);
-        }
-
-        @media (max-width: 768px) {
-            .details-grid {
-                flex-direction: column; /* Stack on mobile */
-                align-items: center;
-            }
-            
-            .detail-item {
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-                flex-direction: row;
-                justify-content: flex-start;
-                gap: 20px;
-                text-align: left;
-                width: 100%;
-                max-width: 100%;
-            }
-
-            .detail-item:last-child {
-                border-bottom: none;
-            }
-
-            .skills-list {
-                gap: 30px;
-                padding-right: 30px;
-            }
-            
-            .skill-card {
-                width: 120px;
-                height: 120px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guido Gonzalez — 3D Rigger &amp; TD</title>
+<meta name="description" content="Junior Rigging TD — animator-friendly rigs, Python tools, and breakdowns of how they're made.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
 </head>
 <body>
 
-    <nav>
-        <a href="./index.html">HOME</a>
-        <a href="./about.html">ABOUT ME</a>
-        <a href="./blog.html" class="active">BLOG</a>
-    </nav>
+<!-- Social rail -->
+<div class="social-rail">
+  <a href="#" target="_blank" rel="noopener">IMDB</a>
+  <a href="https://youtu.be/AxYoezjpZxg" target="_blank" rel="noopener">YOUTUBE</a>
+  <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
+  <a href="mailto:guidogoca@gmail.com">EMAIL</a>
+</div>
 
-    <main class="container">
-        
-        <section class="hero">
-            <h1>Guido<br>Gonzalez</h1>
-            <p class="hero-subtitle">3D Rigger and TD Artist</p>
-        </section>
+<!-- Dark hero -->
+<div class="sec sec-hero">
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">GG — RIGGING TD</a>
+    <div class="nav-links">
+      <a class="active" href="index.html">HOME</a>
+      <a href="blog.html">BLOG</a>
+      <a href="about.html">ABOUT ME</a>
+      <a href="contact.html">CONTACT</a>
+      <button class="theme-toggle" type="button">● BLACK</button>
+    </div>
+  </nav>
 
-        <section class="details-grid">
-            
-            <div class="detail-item">
-                <div class="icon-box">
-                    <svg viewBox="0 0 22 22" width="100%" height="100%">
-                        <path d="M 11 2.063 C 7.203 2.063 4.125 5.141 4.125 8.938 C 4.125 15.125 11 19.938 11 19.938 C 11 19.938 17.875 15.125 17.875 8.938 C 17.875 5.141 14.797 2.063 11 2.063 Z M 11 11.688 C 9.481 11.688 8.25 10.456 8.25 8.938 C 8.25 7.419 9.481 6.188 11 6.188 C 12.519 6.188 13.75 7.419 13.75 8.938 C 13.75 10.456 12.519 11.688 11 11.688 Z" fill="rgba(20, 199, 0, 0.2)"></path>
-                        <path d="M 11 5.5 C 9.102 5.5 7.563 7.039 7.563 8.938 C 7.563 10.836 9.102 12.375 11 12.375 C 12.898 12.375 14.438 10.836 14.438 8.938 C 14.438 7.039 12.898 5.5 11 5.5 Z M 11 11 C 9.861 11 8.938 10.077 8.938 8.938 C 8.938 7.798 9.861 6.875 11 6.875 C 12.139 6.875 13.063 7.798 13.063 8.938 C 13.063 10.077 12.139 11 11 11 Z M 11 1.375 C 6.825 1.38 3.442 4.763 3.438 8.938 C 3.438 11.636 4.684 14.496 7.047 17.209 C 8.108 18.435 9.303 19.539 10.609 20.5 C 10.846 20.666 11.161 20.666 11.398 20.5 C 12.701 19.538 13.894 18.435 14.953 17.209 C 17.312 14.496 18.563 11.636 18.563 8.938 C 18.558 4.763 15.175 1.38 11 1.375 Z M 11 19.078 C 9.579 17.961 4.813 13.857 4.813 8.938 C 4.813 5.52 7.583 2.75 11 2.75 C 14.417 2.75 17.188 5.52 17.188 8.938 C 17.188 13.856 12.421 17.961 11 19.078 Z" fill="#14c700"></path>
-                    </svg>
-                </div>
-                <div class="detail-text">
-                    <strong>BARCELONA</strong>
-                    <span>SPAIN</span>
-                </div>
-            </div>
+  <header class="hero">
+    <p class="kicker reveal">BARCELONA · AVAILABLE FOR RIGGING WORK</p>
+    <h1 class="reveal" data-delay="80">Guido Gonzalez<br><span class="dim">rigs characters<br>&amp; builds tools.</span></h1>
+    <p class="lead reveal" data-delay="160">Junior Rigging TD bridging the artistic and technical sides of 3D — animator-friendly rigs, Python tools, and the breakdowns of how they're made.</p>
+    <div class="cta-row reveal" data-delay="240">
+      <a class="btn-primary" href="#reel">▸ Watch showreel</a>
+      <a class="btn-ghost" href="blog.html">Read the blog</a>
+    </div>
+  </header>
 
-            <div class="detail-item">
-                <div class="icon-box">
-                    <svg viewBox="0 0 22 22" width="100%" height="100%">
-                         <path d="M 19.938 11 C 19.938 12.075 18.406 12.886 17.988 13.895 C 17.586 14.868 18.11 16.529 17.32 17.32 C 16.529 18.11 14.868 17.586 13.895 17.988 C 12.891 18.406 12.074 19.938 11 19.938 C 9.926 19.938 9.109 18.406 8.105 17.988 C 7.132 17.586 5.471 18.11 4.68 17.32 C 3.89 16.529 4.414 14.868 4.012 13.895 C 3.594 12.891 2.063 12.074 2.063 11 C 2.063 9.926 3.594 9.109 4.012 8.105 C 4.414 7.133 3.89 5.471 4.68 4.68 C 5.471 3.89 7.133 4.414 8.105 4.012 C 9.114 3.594 9.926 2.063 11 2.063 C 12.074 2.063 12.891 3.594 13.895 4.012 C 14.868 4.414 16.529 3.89 17.32 4.68 C 18.11 5.471 17.586 7.132 17.988 8.105 C 18.406 9.114 19.938 9.926 19.938 11 Z" fill="rgba(0, 157, 255, 0.2)"></path>
-                        <path d="M 19.41 8.836 C 19.086 8.498 18.751 8.149 18.624 7.842 C 18.508 7.561 18.501 7.095 18.494 6.644 C 18.481 5.805 18.467 4.855 17.806 4.194 C 17.145 3.533 16.195 3.519 15.356 3.506 C 14.905 3.499 14.439 3.493 14.158 3.376 C 13.852 3.249 13.503 2.914 13.164 2.59 C 12.571 2.02 11.897 1.375 11 1.375 C 10.103 1.375 9.43 2.02 8.836 2.59 C 8.497 2.914 8.149 3.249 7.842 3.376 C 7.563 3.493 7.095 3.499 6.644 3.506 C 5.805 3.519 4.855 3.533 4.194 4.194 C 3.533 4.855 3.523 5.805 3.506 6.644 C 3.499 7.095 3.492 7.561 3.376 7.842 C 3.249 8.148 2.914 8.498 2.59 8.836 C 2.02 9.429 1.375 10.103 1.375 11 C 1.375 11.897 2.02 12.57 2.59 13.164 C 2.914 13.502 3.249 13.851 3.376 14.158 C 3.492 14.439 3.499 14.905 3.506 15.356 C 3.519 16.195 3.533 17.145 4.194 17.806 C 4.855 18.467 5.805 18.481 6.644 18.494 C 7.095 18.501 7.561 18.507 7.842 18.624 C 8.148 18.751 8.497 19.086 8.836 19.41 C 9.429 19.98 10.103 20.625 11 20.625 C 11.897 20.625 12.57 19.98 13.164 19.41 C 13.503 19.086 13.851 18.751 14.158 18.624 C 14.439 18.507 14.905 18.501 15.356 18.494 C 16.195 18.481 17.145 18.467 17.806 17.806 C 18.467 17.145 18.481 16.195 18.494 15.356 C 18.501 14.905 18.508 14.439 18.624 14.158 C 18.751 13.852 19.086 13.502 19.41 13.164 C 19.98 12.571 20.625 11.897 20.625 11 C 20.625 10.103 19.98 9.43 19.41 8.836 Z M 18.417 12.213 C 18.006 12.642 17.579 13.087 17.353 13.632 C 17.137 14.156 17.127 14.755 17.119 15.336 C 17.11 15.937 17.101 16.567 16.833 16.833 C 16.566 17.1 15.941 17.11 15.336 17.119 C 14.755 17.127 14.156 17.137 13.632 17.353 C 13.087 17.579 12.642 18.006 12.213 18.417 C 11.783 18.829 11.344 19.25 11 19.25 C 10.656 19.25 10.214 18.827 9.787 18.417 C 9.361 18.007 8.913 17.579 8.368 17.353 C 7.844 17.137 7.245 17.127 6.664 17.119 C 6.063 17.11 5.433 17.101 5.167 16.833 C 4.9 16.566 4.89 15.941 4.881 15.336 C 4.873 14.755 4.863 14.156 4.647 13.632 C 4.421 13.087 3.994 12.642 3.583 12.213 C 3.171 11.783 2.75 11.344 2.75 11 C 2.75 10.656 3.173 10.214 3.583 9.787 C 3.993 9.361 4.421 8.913 4.647 8.368 C 4.863 7.844 4.873 7.245 4.881 6.664 C 4.89 6.063 4.899 5.433 5.167 5.167 C 5.434 4.9 6.059 4.89 6.664 4.881 C 7.245 4.873 7.844 4.863 8.368 4.647 C 8.913 4.421 9.358 3.994 9.787 3.583 C 10.217 3.171 10.656 2.75 11 2.75 C 11.344 2.75 11.786 3.173 12.213 3.583 C 12.639 3.993 13.087 4.421 13.632 4.647 C 14.156 4.863 14.755 4.873 15.336 4.881 C 15.937 4.89 16.567 4.899 16.833 5.167 C 17.1 5.434 17.11 6.059 17.119 6.664 C 17.127 7.245 17.137 7.844 17.353 8.368 C 17.579 8.913 18.006 9.358 18.417 9.787 C 18.829 10.217 19.25 10.656 19.25 11 C 19.25 11.344 18.827 11.786 18.417 12.213 Z M 14.924 8.451 C 15.053 8.58 15.126 8.755 15.126 8.938 C 15.126 9.12 15.053 9.295 14.924 9.424 L 10.111 14.236 C 9.982 14.366 9.807 14.438 9.625 14.438 C 9.443 14.438 9.268 14.366 9.139 14.236 L 7.076 12.174 C 6.807 11.905 6.807 11.47 7.076 11.201 C 7.345 10.932 7.78 10.932 8.049 11.201 L 9.625 12.778 L 13.951 8.451 C 14.08 8.322 14.255 8.249 14.437 8.249 C 14.62 8.249 14.795 8.322 14.924 8.451 Z" fill="#009dff"></path>
-                    </svg>
-                </div>
-                <div class="detail-text">
-                    <strong>RIGGER</strong>
-                    <span>ANIMATION & VFX</span>
-                </div>
-            </div>
-        </section>
+  <div class="reel-wrap" id="reel">
+    <div class="reel reveal">
+      <iframe src="https://www.youtube.com/embed/AxYoezjpZxg" title="Guido Gonzalez Showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <p class="reel-caption reveal">SHOWREEL — 2026</p>
+  </div>
 
-        <section class="video-container">
-            <iframe 
-                src="https://youtu.be/AxYoezjpZxg" 
-                title="Guido Gonzalez Showreel" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-            </iframe>
-        </section>
+  <div class="marquee">
+    <div class="marquee-track">
+      <ul>
+        <li><img src="assets/maya.png" alt="Maya"></li>
+        <li><img src="assets/python.png" alt="Python"></li>
+        <li><img src="assets/git.png" alt="Git"></li>
+        <li><img src="assets/houdini.png" alt="Houdini"></li>
+      </ul>
+      <ul aria-hidden="true">
+        <li><img src="assets/maya.png" alt=""></li>
+        <li><img src="assets/python.png" alt=""></li>
+        <li><img src="assets/git.png" alt=""></li>
+        <li><img src="assets/houdini.png" alt=""></li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-    </main>
-
-    <section class="skills-section">
-        <div class="skills-track">
-            
-            <ul class="skills-list">
-                <li class="skill-card">
-                    <img src="./assets/maya.png" alt="Maya">
-                </li>
-                <li class="skill-card">
-                    <img src="./assets/python.png" alt="Python">
-                </li>
-                <li class="skill-card">
-                    <img src="./assets/git.png" alt="Git">
-                </li>
-                <li class="skill-card">
-                    <img src="./assets/houdini.png" alt="Houdini">
-                </li>
-            </ul>
-
-            <ul class="skills-list" aria-hidden="true">
-                <li class="skill-card">
-                    <img src="./assets/maya.png" alt="Maya">
-                </li>
-                <li class="skill-card">
-                    <img src="./assets/python.png" alt="Python">
-                </li>
-                <li class="skill-card">
-                    <img src="./assets/git.png" alt="Git">
-                </li>
-                <li class="skill-card">
-                    <img src="./assets/houdini.png" alt="Houdini">
-                </li>
-            </ul>
-
+<!-- Light body -->
+<div class="sec sec-body section-pad">
+  <div class="container" style="margin-bottom:72px">
+    <div class="sec-head reveal">
+      <h2>Selected work</h2>
+      <a class="more" href="blog.html">ALL PROJECTS →</a>
+    </div>
+    <div class="card-grid">
+      <a class="card reveal" href="posts/dragon_wings.html">
+        <div class="thumb"><img src="assets/wings_image.png" alt="Dragon wings rig"></div>
+        <div class="card-content">
+          <p class="card-cat">PYTHON / RIGGING</p>
+          <h3>Automated Dragon Wing System</h3>
+          <p class="desc">Modular wing rig with matrix nodes, UV pins and automatic membrane folding.</p>
         </div>
-    </section>
+      </a>
+      <a class="card reveal" data-delay="100" href="posts/maya-deformation-layers-api.html">
+        <div class="thumb"><img src="assets/skinclusterio.png" alt="gcSkinclusterIO tool"></div>
+        <div class="card-content">
+          <p class="card-cat">MAYA API / TOOLDEV</p>
+          <h3>gcSkinclusterIO</h3>
+          <p class="desc">High-performance skin weight export with OpenMaya — with downloadable source.</p>
+        </div>
+      </a>
+    </div>
+  </div>
 
-    <main class="container">
-        <section class="about-section">
-            <h2 class="about-title">I’M A 3D RIGGER AND TD STUDENT,<br>PASSIONATE ABOUT COMBINING TECHNICAL PRECISION, VISUAL IMPACT, AND CREATIVITY.</h2>
-            <p class="about-body">
-                My work bridges the artistic and technical sides of 3D production, crafting tools and rigs that bring characters and objects to life. I focus on building efficient, animator-friendly systems and creating visuals that are both clear and engaging. Every detail matters from structure and motion to deformation and performance to ensure expressive and reliable animation.
-            </p>
-        </section>
+  <div class="container" style="margin-bottom:72px">
+    <div class="sec-head reveal">
+      <h2>From the blog</h2>
+      <a class="more" href="blog.html">ALL POSTS →</a>
+    </div>
+    <div class="row-list">
+      <a class="row reveal" href="posts/maya-deformation-layers-api.html">
+        <span class="title">Mastering Deformation Layers with the Maya API</span>
+        <span class="date">FEB 24, 2026</span>
+      </a>
+      <a class="row reveal" href="posts/dragon_wings.html">
+        <span class="title">Automated Dragon Wing System — full breakdown</span>
+        <span class="date">JAN 2, 2026</span>
+      </a>
+    </div>
+  </div>
 
-        <footer>
-            <div>©2025 Guido Gonzalez</div>
-            <div><a href="#">Back to Top</a></div>
-        </footer>
-    </main>
+  <div class="blurb reveal">
+    <h2>I'M A 3D RIGGER AND TD STUDENT, PASSIONATE ABOUT COMBINING TECHNICAL PRECISION AND CREATIVITY.</h2>
+    <p>My work bridges the artistic and technical sides of 3D production, crafting tools and rigs that bring characters and objects to life.</p>
+    <a class="link-underline" href="about.html">MORE ABOUT ME →</a>
+  </div>
+
+  <div class="container">
+    <footer class="footer">
+      <span>© 2026 GUIDO GONZALEZ</span>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
+        <a href="https://github.com/guidogonzalezc" target="_blank" rel="noopener">GITHUB</a>
+        <a href="mailto:guidogoca@gmail.com">EMAIL</a>
+        <a href="#">BACK TO TOP ↑</a>
+      </div>
+    </footer>
+  </div>
+</div>
 
 </body>
 </html>
