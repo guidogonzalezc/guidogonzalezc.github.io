@@ -1,69 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="black">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mastering Deformation Layers with the Maya API — Guido Gonzalez</title>
-<meta name="description" content="Building a high-performance, zero-dependency Skin I/O tool with OpenMaya — API component types, sparse JSON data and managing complex deformation stacks.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#080a0e">
+<title>gcSkinclusterIO — Guido Gonzalez</title><meta name="description" content="How gcSkinclusterIO exports and restores skin weights with Maya API 2.0, sparse JSON and support for meshes, curves and surfaces.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../css/style.css">
-<script src="../js/main.js" defer></script>
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/works.css"><script src="../js/main.js" defer></script>
 </head>
-<body>
+<body class="case-page" id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="nav home-nav case-nav" aria-label="Main navigation"><a class="nav-logo" href="../index.html">GUIDO<span>GONZALEZ</span><span class="logo-dot">.</span></a><div class="nav-links"><a href="../index.html#about">About</a><a href="../index.html#journey">Journey</a><a class="active" href="../index.html#work">Selected work</a><a href="../blog.html">Notes</a><a href="../index.html#contact">Contact ↗</a></div></nav>
+<main id="main">
+<header class="case-hero">
+<div class="case-backdrop" aria-hidden="true"><img src="../assets/skinclusterio.png" alt="" fetchpriority="high"></div>
+<div class="hero-grid" aria-hidden="true"></div>
+<a class="case-back" href="../index.html#work">← BACK TO SELECTED WORK</a>
+<div class="case-copy"><p class="eyebrow">TOOL DEVELOPMENT / CASE STUDY 02</p><h1>Rebuild the rig.<br>Keep the <span class="gradient-text">weights.</span></h1><p class="case-subtitle">gcSkinclusterIO</p><p class="case-intro">Skinning takes time and careful judgment. gcSkinclusterIO separates that work from the rig build, so weight data can be exported, inspected, and restored during iteration.</p><a class="pill-button" href="#overview">Explore the breakdown <span aria-hidden="true">↓</span></a></div>
+<div class="case-hero-caption"><span>THE WORKING TOOL / PYTHON SOURCE</span><span>FEBRUARY 24, 2026</span></div>
+</header>
+<dl class="case-facts"><div><dt>MY ROLE</dt><dd>Python tool development</dd></div><div><dt>THE TOOLKIT</dt><dd>Maya / OpenMaya API 2.0 / JSON</dd></div><div><dt>PROJECT FOCUS</dt><dd>Skin weight export &amp; import</dd></div></dl>
+<section class="case-overview" aria-labelledby="overview-heading"><div class="section-label"><span>PROJECT OVERVIEW</span><span>THE WHY BEFORE THE HOW</span></div><div class="section-heading reveal"><h2 id="overview-heading">Keep the work.<br>Make room for <span class="gradient-text">iteration.</span></h2><p>I built this tool while developing an autorig for my final degree project. The goal was straightforward: preserve the skinning data outside the scene, so rebuilding a rig would not automatically mean starting the weight work again.</p></div><div class="case-summary-grid"><article class="reveal"><p class="eyebrow">THE CHALLENGE</p><h3>Skinning outlives a rig version</h3><p>Skeleton and rig changes can turn a useful iteration into a time-consuming round of weight transfers.</p></article><article class="reveal"><p class="eyebrow">THE APPROACH</p><h3>Use Maya’s native API</h3><p>Read and write weight arrays through OpenMaya, then store the relevant values and settings in JSON.</p></article><article class="reveal"><p class="eyebrow">THE FOCUS</p><h3>Make the data inspectable</h3><p>Keep the exported structure readable, including influences, component counts, skin settings and blend weights.</p></article></div>
+<figure class="case-figure reveal"><img src="../assets/skinclusterio.png" alt="Python source code for exporting skin weight data with the Maya API" loading="lazy"><figcaption>THE WORKING TOOL / PYTHON SOURCE <span>GUIDO GONZALEZ</span></figcaption></figure>
+<div class="case-flow reveal"><p class="eyebrow">THE SYSTEM AT A GLANCE</p><ol><li><span>01</span>Select skinned geometry</li><li><span>02</span>Export to JSON</li><li><span>03</span>Rebuild the rig</li><li><span>04</span>Restore & check</li></ol></div>
+</section>
+<div class="case-reading"><aside class="case-toc"><nav aria-label="On this page"><p>IN THIS BREAKDOWN</p><a href="#overview"><span>01</span>The challenge</a><a href="#api"><span>02</span>Reading the weights</a><a href="#geometry"><span>03</span>Different geometry</a><a href="#storage"><span>04</span>Saving useful data</a><a href="#restore"><span>05</span>Restoring a skin setup</a><a href="#usage"><span>06</span>Using the tool</a></nav><a class="toc-contact" href="mailto:guidogoca@gmail.com">Questions about the build? ↗</a></aside><article class="case-story" aria-label="gcSkinclusterIO breakdown"><section class="case-chapter reveal" id="overview"><p class="chapter-number">01 / THE BREAKDOWN</p><h2>Protect the skinning work.</h2><p>Rigging and skinning are closely related, but they do not always change at the same pace. A rig may need a new control, a different joint arrangement, or a revised build process while much of the weight painting remains useful.</p>
+<p>During my final degree project, transferring that data became a recurring task. I wanted a small tool that could become part of my own Python workflow, using Maya’s native modules rather than requiring an additional rigging plugin.</p>
+<p>The result is <code>SkinIO</code>, the class behind gcSkinclusterIO. It exports skinCluster data into a JSON file and reads that file back into a scene. The export includes joint influences, skinning settings, sparse weights, and dual-quaternion blend weights when available.</p>
 
-<!-- Social rail -->
-<div class="social-rail">
-  <a href="#" target="_blank" rel="noopener">IMDB</a>
-  <a href="https://youtu.be/AxYoezjpZxg" target="_blank" rel="noopener">YOUTUBE</a>
-  <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
-  <a href="mailto:guidogoca@gmail.com">EMAIL</a>
-</div>
 
-<!-- Dark header -->
-<div class="sec sec-hero">
-  <nav class="nav">
-    <a class="nav-logo" href="../index.html">GG — RIGGING TD</a>
-    <div class="nav-links">
-      <a href="../index.html">HOME</a>
-      <a class="active" href="../blog.html">BLOG</a>
-      <a href="../about.html">ABOUT ME</a>
-      <a href="../contact.html">CONTACT</a>
-      <button class="theme-toggle" type="button">● BLACK</button>
-    </div>
-  </nav>
-  <header style="padding:56px 6vw 48px">
-    <div class="article">
-      <p class="reveal" style="font:400 12px 'IBM Plex Mono',monospace;color:var(--meta);letter-spacing:1px;margin-bottom:18px"><a href="../blog.html">BLOG</a> <span style="color:var(--accent)">/</span> MAYA API · TOOLDEV</p>
-      <h1 class="reveal" data-delay="80" style="font-size:clamp(36px,5vw,60px);font-weight:600;line-height:1;letter-spacing:-.03em;margin-bottom:22px">Mastering Deformation Layers with the Maya API</h1>
-      <p class="lead reveal body-font" data-delay="140" style="max-width:640px;font-size:17px;font-weight:300;line-height:1.6;color:var(--muted);margin-bottom:22px">Building a high-performance, zero-dependency Skin I/O tool: tackling API component types, sparse JSON data, and managing complex deformation stacks for rapid autorig iteration.</p>
-      <div class="reveal" data-delay="200" style="display:flex;flex-wrap:wrap;gap:28px;font:400 12px 'IBM Plex Mono',monospace;color:var(--meta)">
-        <span>FEB 24, 2026</span><span>9 MIN READ</span><span style="color:var(--accent)">OPENMAYA · PIPELINE · TOOL DEV</span>
-      </div>
-    </div>
-  </header>
-</div>
+<aside class="case-callout"><span>THE KEY IDEA</span><h3>A rig version and its skin data are different things.</h3><p>Saving weights outside the scene gives the rig build a separate source of skinning data to restore. It also gives me a file I can inspect when tracking down a problem.</p></aside>
 
-<!-- Light article -->
-<div class="sec sec-body" style="padding:48px 6vw">
-  <div class="article">
+</section>
+<section class="case-chapter reveal" id="api"><p class="chapter-number">02 / THE BREAKDOWN</p><h2>Read weights as data, rather than one command at a time.</h2><p>A skin weight describes how much influence a joint has over a point on a surface. A character with many vertices and joints can therefore have a large number of possible weight values, even when most of those values are zero.</p>
+<p>For scale, a mesh with 50,000 vertices and 100 influences has five million possible vertex–joint pairs. That is an illustrative example, not a benchmark for this project. Querying each pair separately would add a large amount of repeated work.</p>
+<p>The exporter uses Maya API 2.0 and <code>MFnSkinCluster.getWeights()</code> to retrieve a weight array for the selected components. It then processes that array in Python. The importer reconstructs an array and passes it back through <code>setWeights()</code>.</p>
+<p>This approach keeps the data handling concentrated in a few bulk operations. The Python code still has work to do: filtering values, mapping influence names, and rebuilding arrays. Performance depends on the geometry, influence count, and scene; the goal here is a practical data workflow.</p>
 
-    <div class="fig reveal"><img src="../assets/skinclusterio.png" alt="gcSkinclusterIO skin weight I/O tool"></div>
-    <p class="figcap">FIG 01 — gcSkinclusterIO: NATIVE SKIN WEIGHT EXPORT / IMPORT</p>
 
-    <p class="txt reveal">While developing a custom autorig for my University Final Degree Project, I hit a major bottleneck: iteration speed. Every time the rig's skeleton updated or proportions changed, I had to manually transfer skin weights.</p>
-    <p class="txt reveal" style="margin-bottom:40px">Relying on excellent external plugins like <strong style="font-weight:500">ngSkinTools</strong> or <strong style="font-weight:500">mGear</strong> wasn't an option for me. I wanted a native, zero-dependency pipeline tool that could instantly export and import complex deformation stacks across different rig versions without manual intervention — lightning-fast, highly optimized, and fully integrated into my own codebase. This led to the creation of my custom <code class="inline-code">SkinIO</code> manager.</p>
 
-    <h2 class="reveal">1. The performance gap: cmds vs OpenMaya</h2>
-    <p class="txt reveal">When dealing with a dense character mesh of 50,000 vertices and 100 joints, you are iterating through 5 million potential weight values. Using standard <code class="inline-code">maya.cmds.skinPercent</code> to query or set these values evaluates them as strings through Maya's command engine, which creates an enormous bottleneck.</p>
-    <p class="txt reveal" style="margin-bottom:40px">By switching to Maya's API 2.0 (<code class="inline-code">maya.api.OpenMaya</code>), the tool accesses the raw memory array of weights directly. Using <code class="inline-code">MFnSkinCluster.getWeights()</code>, querying millions of weights happens in a fraction of a second.</p>
 
-    <h2 class="reveal">2. Handling versatile geometry</h2>
-    <p class="txt reveal">A robust autorig doesn't just skin polygons. It skins NURBS curves for facial ribbons, and NURBS surfaces for wing membranes or sliding setups. Generalizing the tool meant understanding how the API handles different geometric components.</p>
-    <p class="txt reveal">Meshes and curves are straightforward — they use a single index (vertex 0, 1, 2…). I used <code class="inline-code">MFnSingleIndexedComponent</code> for <code class="inline-code">kMeshVertComponent</code> and <code class="inline-code">kCurveCVComponent</code>. NURBS surfaces, however, are a grid — double-indexed in U and V. To handle this gracefully, I dynamically calculate the total point count (<code class="inline-code">numCVsInU * numCVsInV</code>) and create an <code class="inline-code">MFnDoubleIndexedComponent</code> for <code class="inline-code">kSurfaceCVComponent</code>.</p>
-
-    <div class="codeblock reveal">
+</section>
+<section class="case-chapter reveal" id="geometry"><p class="chapter-number">03 / THE BREAKDOWN</p><h2>Different geometry needs different addresses.</h2><p>Rigging setups do not only use polygon meshes. A ribbon may use a NURBS curve or surface, and those objects also have points that can be influenced by joints. The tool needs to identify those points correctly before it can read their weights.</p>
+<p>A mesh vertex or curve CV can be addressed with one index: point 0, point 1, and so on. The tool uses a single-indexed component for these geometry types. A NURBS surface is a grid, so a CV is addressed by two indices, one in U and one in V.</p>
+<p>For a surface, the tool creates a double-indexed component and records the total point count from the U and V dimensions. This lets the export and import use a common workflow while preparing the appropriate API component for each type of geometry.</p>
+<details class="code-detail"><summary>Inside the tool: preparing geometry components<span aria-hidden="true">+</span></summary><div class="codeblock">
       <div class="code-head"><span>skin_io.py — component types</span><span>PYTHON</span></div>
       <pre><span class="c"># Handling different API component types based on geometry</span>
 <span class="k">def</span> <span class="f">_get_geometry_components</span>(<span class="n">self</span>, <span class="n">dag_path</span>):
@@ -90,13 +71,15 @@
         <span class="n">fn_double</span>.<span class="f">setCompleteData</span>(<span class="n">num_u</span>, <span class="n">num_v</span>)
 
     <span class="k">return</span> <span class="n">count</span>, <span class="n">component</span></pre>
-    </div>
+    </div><p class="code-caption">Project excerpt. This shows part of the setup, rather than a standalone script.</p></details>
 
-    <h2 class="reveal">3. Sparse data optimization</h2>
-    <p class="txt reveal">A standard character mesh is "sparse". If a skeleton has 200 joints, a single vertex on the pinky toe is only influenced by 1 or 2 of them. Storing <code class="inline-code">0.0</code> weights for the other 198 joints across thousands of vertices creates massive, slow-to-read files.</p>
-    <p class="txt reveal">To fix this, my exporter applies a strict tolerance threshold (<code class="inline-code">1e-5</code>). As it slices the flattened API array using a stride based on the influence count, it aggressively filters out negligible weights. This sparse dictionary mapping reduces file sizes by up to 90% compared to raw dumps.</p>
+<aside class="case-callout"><span>THE KEY IDEA</span><h3>Same task, different point layouts.</h3><p>The weight workflow stays similar. What changes is how the tool tells Maya which points it is reading or writing.</p></aside>
 
-    <div class="codeblock reveal">
+</section>
+<section class="case-chapter reveal" id="storage"><p class="chapter-number">04 / THE BREAKDOWN</p><h2>Save the values that matter.</h2><p>Most joints do not affect most points on a character. A vertex near the foot, for example, usually has no meaningful weight from a shoulder joint. Writing every zero into the file makes the exported data larger without adding much useful information.</p>
+<p>The exporter stores a sparse representation. For each influence, it records the component indices with weights above a tolerance of <code>1e-5</code>, along with their values rounded to five decimal places. An omitted entry is reconstructed as zero during import.</p>
+<p>This is a deliberate tradeoff: very small weights are discarded and the remaining values are rounded. The amount of storage saved depends on how many influences actually affect each point. It is not a lossless dump of every original floating-point value.</p>
+<details class="code-detail"><summary>Inside the tool: a sparse weight dictionary<span aria-hidden="true">+</span></summary><div class="codeblock">
       <div class="code-head"><span>skin_io.py — sparse export</span><span>PYTHON</span></div>
       <pre><span class="c"># Extracting sparse data using a stride and tolerance</span>
 <span class="n">flat_weights</span> <span class="o">=</span> <span class="cl">list</span>(<span class="n">weights_marray</span>)
@@ -113,48 +96,40 @@
 
     <span class="k">if</span> <span class="n">j_indices</span>:
         <span class="n">sparse_weights</span>[<span class="n">inf_name</span>] <span class="o">=</span> {<span class="s">"ix"</span>: <span class="n">j_indices</span>, <span class="s">"vw"</span>: <span class="n">j_weights</span>}</pre>
-    </div>
+    </div><p class="code-caption">Project excerpt. This shows part of the setup, rather than a standalone script.</p></details>
+<h3>Why JSON?</h3><p>JSON keeps the exported structure readable. I can see which geometry was saved, which influences were listed, and which settings were captured without having to interpret a custom binary format. The file is written without extra whitespace to avoid unnecessary bulk.</p>
+<p>A readable format is useful for debugging, but it does not make a file automatically compatible with changed topology. This version restores data by component index and influence name. It does not include a proximity-based transfer or an automatic remapping system.</p>
 
-    <h2 class="reveal">4. JSON (ASCII) over binary</h2>
-    <p class="txt reveal">A common debate is whether to serialize data as binary (fast, small) or ASCII (JSON). I specifically chose JSON for flexibility and debugging.</p>
-    <p class="txt reveal" style="margin-bottom:40px">If topology slightly changes during production, a binary file might crash or corrupt the load. With an ASCII JSON file, I can easily write a secondary script to read the JSON, map the old vertex indices to the new topology using proximity algorithms, and inject the patched data safely. To offset the larger file size inherent to ASCII, I strip out unnecessary whitespace during the dump using <code class="inline-code">separators=(',', ':')</code>.</p>
 
-    <h2 class="reveal">5. Maintaining the deformation stack</h2>
-    <p class="txt reveal">In complex rigs, a single skinCluster is rarely enough. We stack base skins and corrective skins. If these layers are applied in the wrong order upon import, the rig breaks.</p>
-    <p class="txt reveal" style="margin-bottom:40px">The tool iterates through the node history using <code class="inline-code">cmds.listHistory</code> to capture the exact stack order. During import, after all skinClusters are rebuilt, it actively reorders them using <code class="inline-code">cmds.reorderDeformers</code> to guarantee the original deformation logic remains intact.</p>
+</section>
+<section class="case-chapter reveal" id="restore"><p class="chapter-number">05 / THE BREAKDOWN</p><h2>Restore more than the painted values.</h2><p>A skinCluster also contains settings that affect how weights are interpreted. The tool captures settings such as the skinning method, normalization mode, maximum-influence settings, and weight distribution. These sit alongside the weight data in each exported entry.</p>
+<p>On import, the tool looks for the geometry in the scene and compares its point count with the saved count. If those counts differ, that skin entry is skipped. Matching counts alone are not enough to prove matching topology: the point order still needs to describe the same geometry.</p>
+<p>The importer reuses an existing skinCluster or tries to create one from the available joints. Influence names are used to place the saved values into the current weight array. Keeping geometry and joint names consistent is therefore part of the intended workflow.</p>
+<p>While injecting the weight array, the script temporarily disables normalization and maximum-influence enforcement, then restores those settings. It also restores stored blend weights when present and attempts to place the processed skinClusters back in the captured order.</p>
+<p>This version records the order of skinClusters, rather than serializing every deformer and every connection in the scene. I still check the resulting deformation and history after import, especially when the rig has other deformation layers.</p>
 
-    <h2 class="reveal">Conclusion</h2>
-    <p class="txt reveal" style="margin-bottom:44px">By leveraging OpenMaya, we get the speed of C++ under the hood while maintaining the flexibility of Python. Building this custom tool gave my autorig the independence and iteration speed it desperately needed for my final degree project — proving that sometimes, building your own foundational pipeline tools is the most effective way forward.</p>
 
-    <div class="download-wrap reveal">
-      <a href="../scripts/gcSkinclusterIO.py" download="gcSkinclusterIO.py" class="download-btn">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        Download Python Script
-      </a>
-      <p class="download-note">Free to use and modify for your own pipelines.</p>
-    </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:24px 0;border-top:1px solid var(--border)">
-      <a href="../blog.html" style="font:400 12px 'IBM Plex Mono',monospace;color:var(--faded)">← BACK TO BLOG</a>
-      <a href="dragon_wings.html" style="text-align:right">
-        <p style="font:400 11px 'IBM Plex Mono',monospace;color:var(--faded);margin-bottom:2px">NEXT</p>
-        <span style="font-size:16px;font-weight:600">Automated Dragon Wing System →</span>
-      </a>
-    </div>
-    <footer class="footer">
-      <span>© 2026 GUIDO GONZALEZ</span>
-      <div class="links">
-        <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
-        <a href="https://github.com/guidogonzalezc" target="_blank" rel="noopener">GITHUB</a>
-        <a href="mailto:guidogoca@gmail.com">EMAIL</a>
-      </div>
-    </footer>
-  </div>
-</div>
 
-</body>
-</html>
+</section>
+<section class="case-chapter reveal" id="usage"><p class="chapter-number">06 / THE BREAKDOWN</p><h2>Use it as part of a repeatable workflow.</h2><p>Download the script below and make it available on Maya’s Python path. In Maya’s Python Script Editor, import <code>SkinIO</code>, create an instance, and call the export or import method with a JSON file path.</p>
+<p>For export, select the skinned geometry or skinClusters you want to save. If there is no active selection, the exporter searches the scene for skinned geometry. This makes it useful both for a focused asset update and for a broader export.</p>
+
+<div class="codeblock"><div class="code-head"><span>Example usage in Maya</span><span>PYTHON</span></div><pre>from gcSkinclusterIO import SkinIO
+
+skin_io = SkinIO()
+
+# Select the geometry to export first.
+skin_io.export_skins("C:/tmp/skin_data.json")
+
+# In the target scene, with matching geometry and joints:
+skin_io.import_skins("C:/tmp/skin_data.json")</pre></div><p>Use a path to an existing folder. The export writes a JSON file at that location; the import reads it and updates or creates skinClusters in the target scene. I keep a scene copy when testing a changed build and compare representative poses after restoring the weights.</p>
+<p>The practical gain is a clearer division of work: the rig build creates the structure, and a separate file carries the skin data. There is room to improve the checks and add more flexible mapping, but the current tool gives my workflow a small, inspectable foundation.</p>
+
+<div class="case-download"><div><p class="eyebrow">TAKE A LOOK INSIDE</p><h3>gcSkinclusterIO.py</h3><p>The source used in this breakdown. Runs inside Maya using its native Python modules.</p></div><a href="../scripts/gcSkinclusterIO.py" download="gcSkinclusterIO.py" class="pill-button primary">Download Python script <span aria-hidden="true">↓</span></a></div>
+</section></article></div>
+<a class="case-next reveal" href="dragon_wings.html"><div><p class="eyebrow">EXPLORE ANOTHER PROJECT</p><h2>Automated Dragon Wing System</h2><p>The relationships behind a folding creature wing.</p><span class="text-link">Read the breakdown ↗</span></div><img src="../assets/wings_image.png" alt="" loading="lazy"><span class="next-arrow" aria-hidden="true">↗</span></a>
+<section class="case-contact"><p class="eyebrow">LET’S TALK RIGGING</p><h2>A question, an idea,<br>or a <span class="gradient-text">new challenge?</span></h2><a class="contact-email" href="mailto:guidogoca@gmail.com">guidogoca@gmail.com ↗</a></section>
+</main>
+<footer class="portfolio-footer"><a class="nav-logo" href="../index.html">GUIDO<span>GONZALEZ</span><span class="logo-dot">.</span></a><span>© 2026 GUIDO GONZALEZ</span><a href="#top">Back to top ↑</a></footer>
+</body></html>

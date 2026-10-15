@@ -1,64 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="black">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Automated Dragon Wing System — Guido Gonzalez</title>
-<meta name="description" content="Building a modular, matrix-driven wing rig with automated membrane stretching and UV-based attachments.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#080a0e">
+<title>Automated Dragon Wing System — Guido Gonzalez</title><meta name="description" content="A modular dragon wing rig explained: matrix-driven fingers, responsive membranes and UV-pinned deformation.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="../css/style.css">
-<script src="../js/main.js" defer></script>
+<link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/works.css"><script src="../js/main.js" defer></script>
 </head>
-<body>
+<body class="case-page" id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="nav home-nav case-nav" aria-label="Main navigation"><a class="nav-logo" href="../index.html">GUIDO<span>GONZALEZ</span><span class="logo-dot">.</span></a><div class="nav-links"><a href="../index.html#about">About</a><a href="../index.html#journey">Journey</a><a class="active" href="../index.html#work">Selected work</a><a href="../blog.html">Notes</a><a href="../index.html#contact">Contact ↗</a></div></nav>
+<main id="main">
+<header class="case-hero">
+<div class="case-backdrop" aria-hidden="true"><img src="../assets/wings_image.png" alt="" fetchpriority="high"></div>
+<div class="hero-grid" aria-hidden="true"></div>
+<a class="case-back" href="../index.html#work">← BACK TO SELECTED WORK</a>
+<div class="case-copy"><p class="eyebrow">CREATURE RIGGING / CASE STUDY 01</p><h1>A wing built<br>to <span class="gradient-text">unfold.</span></h1><p class="case-subtitle">Automated Dragon Wing System</p><p class="case-intro">A dragon wing is more than a chain of joints. It is a moving relationship between fingers, a flexible membrane, and the controls an animator needs to shape a performance.</p><a class="pill-button" href="#overview">Explore the breakdown <span aria-hidden="true">↓</span></a></div>
+<div class="case-hero-caption"><span>THE WORKING RIG / MAYA VIEWPORT</span><span>JANUARY 02, 2026</span></div>
+</header>
+<dl class="case-facts"><div><dt>MY ROLE</dt><dd>Rig design &amp; Python automation</dd></div><div><dt>THE TOOLKIT</dt><dd>Maya / Python / Matrix nodes</dd></div><div><dt>PROJECT FOCUS</dt><dd>Creature wing system</dd></div></dl>
+<section class="case-overview" aria-labelledby="overview-heading"><div class="section-label"><span>PROJECT OVERVIEW</span><span>THE WHY BEFORE THE HOW</span></div><div class="section-heading reveal"><h2 id="overview-heading">A convincing wing starts<br>with a <span class="gradient-text">clear structure.</span></h2><p>The aim of this project was to make a complex wing easier to build and easier to animate. Instead of treating every small deformation as a separate task, I built a repeatable system in which the main structure drives the finer details.</p></div><div class="case-summary-grid"><article class="reveal"><p class="eyebrow">THE CHALLENGE</p><h3>Keep the wing connected</h3><p>The membrane needs to respond as the fingers spread and fold, without becoming a separate set of controls to manage.</p></article><article class="reveal"><p class="eyebrow">THE APPROACH</p><h3>Build relationships first</h3><p>Matrix nodes describe how the finger chains and membrane guides follow one another. Python builds the repeated parts.</p></article><article class="reveal"><p class="eyebrow">THE FOCUS</p><h3>Make iteration practical</h3><p>The setup can be regenerated as the structure or deformation resolution changes, keeping the build process consistent.</p></article></div>
+<figure class="case-figure reveal"><img src="../assets/wings_image.png" alt="Dragon wing geometry, finger chains and animation controls in the Maya viewport" loading="lazy"><figcaption>THE WORKING RIG / MAYA VIEWPORT <span>GUIDO GONZALEZ</span></figcaption></figure>
+<div class="case-flow reveal"><p class="eyebrow">THE SYSTEM AT A GLANCE</p><ol><li><span>01</span>Position the guides</li><li><span>02</span>Build finger chains</li><li><span>03</span>Shape the membrane</li><li><span>04</span>Attach deformation joints</li></ol></div>
+</section>
+<div class="case-reading"><aside class="case-toc"><nav aria-label="On this page"><p>IN THIS BREAKDOWN</p><a href="#overview"><span>01</span>The challenge</a><a href="#fingers"><span>02</span>The finger structure</a><a href="#membrane"><span>03</span>The membrane</a><a href="#surface"><span>04</span>Following the surface</a><a href="#workflow"><span>05</span>Building and iterating</a><a href="#reflection"><span>06</span>What comes next</a></nav><a class="toc-contact" href="mailto:guidogoca@gmail.com">Questions about the build? ↗</a></aside><article class="case-story" aria-label="Automated Dragon Wing System breakdown"><section class="case-chapter reveal" id="overview"><p class="chapter-number">01 / THE BREAKDOWN</p><h2>The movement between the bones.</h2><p>When a dragon opens its wing, the fingers give it structure, but the membrane gives the movement its silhouette. A useful rig has to coordinate both. If the fingers spread while the skin between them stays behind, the wing no longer reads as one connected form.</p>
+<p>Folding introduces a different problem. The same surface that stretches across an open wing needs to gather into a much smaller shape. That makes the relationship between neighboring fingers just as important as the rotation of each individual joint.</p>
+<p>My approach was to separate the system into three parts: a finger structure, a set of guides for the webbing, and smaller joints that follow a supporting surface. Each part has a specific job. Together, they turn a few structural movements into a more detailed deformation.</p>
 
-<!-- Social rail -->
-<div class="social-rail">
-  <a href="#" target="_blank" rel="noopener">IMDB</a>
-  <a href="https://youtu.be/AxYoezjpZxg" target="_blank" rel="noopener">YOUTUBE</a>
-  <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
-  <a href="mailto:guidogoca@gmail.com">EMAIL</a>
-</div>
 
-<!-- Dark header -->
-<div class="sec sec-hero">
-  <nav class="nav">
-    <a class="nav-logo" href="../index.html">GG — RIGGING TD</a>
-    <div class="nav-links">
-      <a href="../index.html">HOME</a>
-      <a class="active" href="../blog.html">BLOG</a>
-      <a href="../about.html">ABOUT ME</a>
-      <a href="../contact.html">CONTACT</a>
-      <button class="theme-toggle" type="button">● BLACK</button>
-    </div>
-  </nav>
-  <header style="padding:56px 6vw 48px">
-    <div class="article">
-      <p class="reveal" style="font:400 12px 'IBM Plex Mono',monospace;color:var(--meta);letter-spacing:1px;margin-bottom:18px"><a href="../blog.html">BLOG</a> <span style="color:var(--accent)">/</span> PYTHON · RIGGING</p>
-      <h1 class="reveal" data-delay="80" style="font-size:clamp(36px,5vw,60px);font-weight:600;line-height:1;letter-spacing:-.03em;margin-bottom:22px">Automated Dragon Wing System</h1>
-      <p class="lead reveal body-font" data-delay="140" style="max-width:640px;font-size:17px;font-weight:300;line-height:1.6;color:var(--muted);margin-bottom:22px">Building a modular, matrix-driven wing rig with automated membrane stretching and UV-based attachments.</p>
-      <div class="reveal" data-delay="200" style="display:flex;flex-wrap:wrap;gap:28px;font:400 12px 'IBM Plex Mono',monospace;color:var(--meta)">
-        <span>JAN 2, 2026</span><span>12 MIN READ</span><span style="color:var(--accent)">MAYA API · PYTHON · MATRIX NODES</span>
-      </div>
-    </div>
-  </header>
-</div>
+<aside class="case-callout"><span>THE KEY IDEA</span><h3>Structure first, detail second.</h3><p>The main controls define the pose. The membrane system follows that structure, so the animator can concentrate on the wing’s overall shape before refining the deformation.</p></aside>
 
-<!-- Light article -->
-<div class="sec sec-body" style="padding:48px 6vw">
-  <div class="article">
-
-    <div class="fig reveal"><img src="../assets/wings_image.png" alt="Dragon wing rig in the Maya viewport"></div>
-    <p class="figcap">FIG 01 — WING RIG IN THE MAYA VIEWPORT</p>
-
-    <p class="txt reveal">Rigging organic wings is one of the most complex tasks in creature setups. The challenge lies in creating a system that folds naturally, preserves volume, and remains performant. For this dragon project, I developed a modular Python tool that generates the entire setup automatically.</p>
-    <p class="txt reveal" style="margin-bottom:40px">The core of the system relies on <strong style="font-weight:500">matrix nodes</strong> (<code class="inline-code">blendMatrix</code>, <code class="inline-code">aimMatrix</code>, <code class="inline-code">pickMatrix</code>) rather than traditional constraints, ensuring a robust and evaluation-friendly rig.</p>
-
-    <h2 class="reveal">1. The matrix-driven phalanges</h2>
-    <p class="txt reveal">The finger structure needs to handle both FK and IK logic. Instead of heavy orient constraints, I used <code class="inline-code">aimMatrix</code> nodes to drive the orientation of guides and joints — stable aiming vectors that don't flip easily.</p>
-
-    <div class="codeblock reveal">
+</section>
+<section class="case-chapter reveal" id="fingers"><p class="chapter-number">02 / THE BREAKDOWN</p><h2>Give each finger a direction.</h2><p>The long bones in the wing work like fingers. Each chain needs a consistent direction as its guides move, and that direction needs to remain understandable when the rig is rebuilt. I use Maya’s <code>aimMatrix</code> nodes to express these orientation relationships.</p>
+<p>A matrix describes a transform: where something is, how it is rotated, and how it is scaled. Working with matrices lets me pass that transform through the rig as one relationship, instead of building a separate connection for every channel.</p>
+<p>In the setup below, the primary axis points along the finger. The secondary axis helps define how the chain twists around that direction. Choosing these axes deliberately is important: aiming at a target alone does not define every aspect of a joint’s orientation.</p>
+<details class="code-detail"><summary>Inside the setup: aiming the finger guides<span aria-hidden="true">+</span></summary><div class="codeblock">
       <div class="code-head"><span>dragon_falanges.py</span><span>PYTHON</span></div>
       <pre><span class="c"># dragon_falanges.py snippet</span>
 <span class="k">for</span> i <span class="k">in</span> range(len(self.guides)-1):
@@ -71,15 +48,16 @@
     <span class="c"># Connect matrices directly (no constraints)</span>
     cmds.connectAttr(order[i][0] + <span class="s">".worldMatrix[0]"</span>, aim_matrix + <span class="s">".inputMatrix"</span>)
     cmds.connectAttr(order[i][1] + <span class="s">".primaryTargetMatrix"</span>, aim_matrix + <span class="s">".primaryTargetMatrix"</span>)</pre>
-    </div>
+    </div><p class="code-caption">Project excerpt. This shows part of the setup, rather than a standalone script.</p></details>
+<h3>Two ways to pose the same wing</h3><p>FK, or forward kinematics, lets the animator rotate the joints along a chain. IK, or inverse kinematics, lets a target control the chain’s end. They solve different posing needs: FK is useful for shaping an arc, while IK is useful when an end position matters.</p>
+<p>The wing uses <code>blendMatrix</code> to blend between the FK and IK transforms before passing the result to the deformation joints. Keeping this relationship explicit makes the rig easier to inspect when something does not behave as expected. The blend is one part of the setup; it does not, on its own, replace pose matching when switching modes.</p>
 
-    <h3 class="reveal">FK / IK switching</h3>
-    <p class="txt reveal" style="margin-bottom:40px">To handle the switch, I used <code class="inline-code">blendMatrix</code> nodes. This blends the world matrix of the FK chain and the IK chain directly, feeding the result into the skinning joints — cleaner than blending individual translate/rotate/scale channels.</p>
 
-    <h2 class="reveal">2. The membrane (webbing) logic</h2>
-    <p class="txt reveal">The most difficult part of a wing is the skin between fingers. It needs to stretch linearly when fingers open and relax when they close. I solved this by calculating the weighted center between two fingers using <code class="inline-code">wtAddMatrix</code> — a virtual mid-point that stays perfectly centered regardless of hierarchy.</p>
-
-    <div class="codeblock reveal">
+</section>
+<section class="case-chapter reveal" id="membrane"><p class="chapter-number">03 / THE BREAKDOWN</p><h2>Make the webbing respond to the fingers.</h2><p>The membrane is the flexible skin between two neighboring fingers. Rather than positioning every supporting point by hand, I derive a shared guide from the two finger transforms. As those fingers move apart or come together, the guide changes with them.</p>
+<p>The excerpt uses <code>wtAddMatrix</code> with equal weights. For the translation component, this gives a position halfway between the two inputs. It provides a useful reference for the webbing, but it should not be confused with a complete simulation of how real skin stretches or folds.</p>
+<p>This distinction matters to the design. The rig is a controlled deformation system: it gives the membrane a repeatable relationship to the bones. The final appearance still depends on the surface layout, joint placement, skin weights, and the pose the animator chooses.</p>
+<details class="code-detail"><summary>Inside the setup: a shared membrane guide<span aria-hidden="true">+</span></summary><div class="codeblock">
       <div class="code-head"><span>membran_module.py</span><span>PYTHON</span></div>
       <pre><span class="c"># membran_module.py - calculating the mid-point</span>
 mid_position = cmds.createNode(<span class="s">"wtAddMatrix"</span>, name=f<span class="s">"..._WTM"</span>)
@@ -91,12 +69,15 @@ cmds.connectAttr(joint_two + <span class="s">".worldMatrix[0]"</span>, mid_posit
 <span class="c"># Weight them equally (0.5) to find the center</span>
 cmds.setAttr(mid_position + <span class="s">".wtMatrix[0].weightIn"</span>, <span class="n">0.5</span>)
 cmds.setAttr(mid_position + <span class="s">".wtMatrix[1].weightIn"</span>, <span class="n">0.5</span>)</pre>
-    </div>
+    </div><p class="code-caption">Project excerpt. This shows part of the setup, rather than a standalone script.</p></details>
 
-    <h2 class="reveal">3. Surface attachment with UV pins</h2>
-    <p class="txt reveal">To drive the actual geometry, I generated a NURBS surface based on the finger positions. Instead of <code class="inline-code">pointOnSurfaceInfo</code> nodes (which can be slow), I used Maya's UV Pin nodes to attach micro-joints to specific U/V coordinates — as the surface moves, the joints follow perfectly in tangent space.</p>
+<aside class="case-callout"><span>THE KEY IDEA</span><h3>A relationship instead of a fixed position.</h3><p>The membrane guide is derived from the neighboring fingers. Its position updates with the pose rather than staying at a location chosen only during the initial build.</p></aside>
 
-    <div class="codeblock reveal">
+</section>
+<section class="case-chapter reveal" id="surface"><p class="chapter-number">04 / THE BREAKDOWN</p><h2>Let the smaller joints follow a surface.</h2><p>The broad movement of the wing is not enough to describe every part of the membrane. To distribute deformation across the webbing, I generate a NURBS surface based on the finger positions and place smaller joints across that surface.</p>
+<p>Think of the surface as a flexible sheet with its own coordinate grid. The U coordinate describes one direction across the sheet, and V describes the other. A UV pin gives a joint a specific place on that sheet to follow as its shape changes.</p>
+<p>The script distributes these attachment points across rows and columns. Each pin supplies an output matrix, which is connected to the corresponding joint’s <code>offsetParentMatrix</code>. This connects the joint’s placement to the surface without adding a separate parent transform for every attachment.</p>
+<details class="code-detail"><summary>Inside the setup: distributing UV attachments<span aria-hidden="true">+</span></summary><div class="codeblock">
       <div class="code-head"><span>uv_pins.py</span><span>PYTHON</span></div>
       <pre><span class="c"># Generating UV pins dynamically</span>
 <span class="k">for</span> i <span class="k">in</span> range(u_row):
@@ -111,29 +92,29 @@ cmds.setAttr(mid_position + <span class="s">".wtMatrix[1].weightIn"</span>, <spa
 
         <span class="c"># Connect to joint offset</span>
         cmds.connectAttr(f<span class="s">"{uv_pin}.outputMatrix[{count}]"</span>, f<span class="s">"{joint}.offsetParentMatrix"</span>)</pre>
-    </div>
+    </div><p class="code-caption">Project excerpt. This shows part of the setup, rather than a standalone script.</p></details>
+<p>The number of attachment points is a design choice. More joints give the skinning stage more places to distribute weights, but they also increase the amount of data and evaluation in the rig. The goal is enough resolution for the deformation, rather than the highest possible joint count.</p>
 
-    <h2 class="reveal">Conclusion</h2>
-    <p class="txt reveal">By scripting this process, I can iterate on the resolution of the wing (number of micro-joints) without manually rebuilding constraints. The use of matrix nodes ensures the rig runs at high frame rates, even with complex deformation layers.</p>
-    <p class="txt reveal" style="margin-bottom:56px">Future improvements could include a collision layer on the membrane using simple Euclidean distance checks within the Python script to drive blendShapes.</p>
 
-    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:24px 0;border-top:1px solid var(--border)">
-      <a href="../blog.html" style="font:400 12px 'IBM Plex Mono',monospace;color:var(--faded)">← BACK TO BLOG</a>
-      <a href="maya-deformation-layers-api.html" style="text-align:right">
-        <p style="font:400 11px 'IBM Plex Mono',monospace;color:var(--faded);margin-bottom:2px">NEXT</p>
-        <span style="font-size:16px;font-weight:600">Mastering Deformation Layers →</span>
-      </a>
-    </div>
-    <footer class="footer">
-      <span>© 2026 GUIDO GONZALEZ</span>
-      <div class="links">
-        <a href="https://www.linkedin.com/in/guidogonzalezc/" target="_blank" rel="noopener">LINKEDIN</a>
-        <a href="https://github.com/guidogonzalezc" target="_blank" rel="noopener">GITHUB</a>
-        <a href="mailto:guidogoca@gmail.com">EMAIL</a>
-      </div>
-    </footer>
-  </div>
-</div>
+</section>
+<section class="case-chapter reveal" id="workflow"><p class="chapter-number">05 / THE BREAKDOWN</p><h2>A build process that can be repeated.</h2><p>A scripted rig is valuable when it makes the next iteration easier. Once the guides define the structure, Python creates the recurring node connections and attachment patterns. This removes much of the repetitive setup work from the rebuilding process.</p>
+<p>For example, changing the number of membrane joints should not mean reconnecting every UV pin by hand. The grid can be regenerated from its row and column settings. That makes it easier to compare a lighter setup with a more detailed one while keeping the underlying approach the same.</p>
+<p>I think of this as separating the design decisions from the assembly work. The decisions still need attention: guide placement, axes, surface shape, and skinning all affect the result. Automation makes those decisions easier to revisit because the repetitive steps are handled consistently.</p>
 
-</body>
-</html>
+
+<aside class="case-callout"><span>THE KEY IDEA</span><h3>Automate the repetition, keep the judgment.</h3><p>The script assembles the system. The rigger still decides what the wing should do, how much control it needs, and where the deformation needs more attention.</p></aside>
+
+</section>
+<section class="case-chapter reveal" id="reflection"><p class="chapter-number">06 / THE BREAKDOWN</p><h2>What this project taught me.</h2><p>This project brought several rigging ideas together around one concrete problem: making the space between the bones behave as part of the wing. Breaking that problem into smaller systems helped me reason about it and explain why each connection exists.</p>
+<p>The strongest part of the approach is the repeatable build. It gives me a practical way to revisit the finger structure and membrane resolution without treating every version as a new manual setup. Matrix nodes also make the transform relationships visible within Maya’s dependency graph.</p>
+<p>A next step would be to explore how the membrane behaves in more tightly folded poses, including corrective shapes or collision-aware adjustments. Those are possible extensions, rather than features of the current setup. For now, the focus is a modular foundation that can be posed, inspected, and refined.</p>
+
+
+
+
+</section></article></div>
+<a class="case-next reveal" href="maya-deformation-layers-api.html"><div><p class="eyebrow">EXPLORE ANOTHER PROJECT</p><h2>gcSkinclusterIO</h2><p>Keeping skin weights through a rig rebuild.</p><span class="text-link">Read the breakdown ↗</span></div><img src="../assets/skinclusterio.png" alt="" loading="lazy"><span class="next-arrow" aria-hidden="true">↗</span></a>
+<section class="case-contact"><p class="eyebrow">LET’S TALK RIGGING</p><h2>A question, an idea,<br>or a <span class="gradient-text">new challenge?</span></h2><a class="contact-email" href="mailto:guidogoca@gmail.com">guidogoca@gmail.com ↗</a></section>
+</main>
+<footer class="portfolio-footer"><a class="nav-logo" href="../index.html">GUIDO<span>GONZALEZ</span><span class="logo-dot">.</span></a><span>© 2026 GUIDO GONZALEZ</span><a href="#top">Back to top ↑</a></footer>
+</body></html>
