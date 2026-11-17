@@ -39,7 +39,7 @@ Para una siguiente iteración, una captura limpia del viewport sin paneles, con 
 
 ## Comportamiento
 
-- Los fondos rotan cada 15 segundos en el orden Here Be Dragons → Out Cold → Sprouts. Los botones permiten seleccionar o pausar la rotación; una selección manual reinicia los 15 segundos. La rotación se pausa cuando la pestaña no está visible y empieza pausada si se prefiere reducir movimiento.
+- Los fondos rotan cada 10 segundos en el orden Here Be Dragons → Out Cold → Sprouts. Los botones permiten seleccionar o pausar la rotación; una selección manual reinicia los 10 segundos. La rotación se pausa cuando la pestaña no está visible y empieza pausada si se prefiere reducir movimiento.
 - El showreel se carga de forma diferida y tiene un enlace alternativo a YouTube.
 - El contenido y los enlaces funcionan sin JavaScript; el menú permanece desplegado.
 - Se respeta la preferencia de reducir movimiento.
