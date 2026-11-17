@@ -415,7 +415,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 .project-info > p:not(.eyebrow) { font-size: 14px; color: var(--soft); line-height: 1.8; max-width: 480px; }
 .project-info .text-link { margin-top: 22px; }
 .portfolio-home .reel { max-width: none; border-radius: 8px; border-color: var(--line); }
-.portfolio-home .reel-caption { display: flex; justify-content: space-between; max-width: none; color: #969ba8; font-size: 9px; margin-top: 16px; }
+.portfolio-home .reel-caption { display: block; text-align: center; max-width: none; color: #969ba8; font-size: 9px; margin-top: 16px; }
 .experience-row { display: grid; grid-template-columns: .7fr 1.3fr 1.3fr auto; gap: 28px; align-items: start; border-top: 1px solid var(--line); padding: 30px 0; }
 .experience-row:last-child { border-bottom: 1px solid var(--line); }
 .experience-date { font-size: 10px; color: #9fa9bb; padding-top: 5px; }
