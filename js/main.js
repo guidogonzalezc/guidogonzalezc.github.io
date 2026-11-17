@@ -19,7 +19,9 @@
     var button = document.createElement('button');
     button.className = 'nav-menu';
     button.type = 'button';
-    button.textContent = 'Menu +';
+    var menuName = root.lang === 'es' || root.lang === 'ca' ? 'Menú' : 'Menu';
+    var closeName = root.lang === 'es' ? 'Cerrar' : root.lang === 'ca' ? 'Tanca' : 'Close';
+    button.textContent = menuName + ' +';
     button.setAttribute('aria-controls', links.id);
     button.setAttribute('aria-expanded', 'false');
     nav.insertBefore(button, links);
@@ -27,13 +29,13 @@
     function closeMenu() {
       links.classList.remove('is-open');
       button.setAttribute('aria-expanded', 'false');
-      button.textContent = 'Menu +';
+      button.textContent = menuName + ' +';
     }
     button.addEventListener('click', function () {
       var open = button.getAttribute('aria-expanded') !== 'true';
       links.classList.toggle('is-open', open);
       button.setAttribute('aria-expanded', String(open));
-      button.textContent = open ? 'Close −' : 'Menu +';
+      button.textContent = open ? closeName + ' −' : menuName + ' +';
     });
     links.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', closeMenu);
