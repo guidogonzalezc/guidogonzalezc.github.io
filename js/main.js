@@ -53,7 +53,7 @@
   });
   root.classList.add('scenes-ready');
 
-  // Rotate every 15 seconds; manual selection restarts the full interval.
+  // Rotate every 10 seconds; manual selection restarts the full interval.
   var scenes = [
     { category: 'RIGGING & ADONIS CFX / FROM THE REEL', title: 'Here Be Dragons ↗', url: 'https://www.youtube.com/watch?v=x8iOWTcs6yY&t=5s' },
     { category: 'CHARACTER RIGGING / FROM THE REEL', title: 'Out Cold ↗', url: 'https://www.youtube.com/watch?v=x8iOWTcs6yY&t=21s' },
@@ -81,7 +81,7 @@
     sceneTimer = setTimeout(function () {
       showScene((currentScene + 1) % scenes.length);
       scheduleScene();
-    }, 15000);
+    }, 10000);
   }
   function updateRotationControl() {
     if (!rotationControl) return;
