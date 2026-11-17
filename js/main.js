@@ -46,6 +46,23 @@
     });
   });
   root.classList.add('menu-ready');
+  // Preserve the current section when switching between static language pages.
+  var locale = (window.location.pathname.match(/^\/(es|ca)(?:\/|$)/) || [null, 'en'])[1];
+  var languageLinks = document.querySelectorAll('.language-switch [data-locale]');
+  function syncLanguageLinks() {
+    languageLinks.forEach(function (link) {
+      var lang = link.getAttribute('data-locale');
+      var prefix = lang === 'en' ? '/' : '/' + lang + '/';
+      link.setAttribute('href', prefix + (window.location.hash || ''));
+      if (lang === locale) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  }
+  if (languageLinks.length) {
+    syncLanguageLinks();
+    window.addEventListener('hashchange', syncLanguageLinks);
+  }
+
 
   // Keep the background layers rendered for a crossfade.
   document.querySelectorAll('[data-scene]').forEach(function (scene) {

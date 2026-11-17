@@ -48,3 +48,12 @@ Para una siguiente iteración, una captura limpia del viewport sin paneles, con 
 - Google Fonts y el reproductor de YouTube requieren conexión; las fuentes tienen alternativas locales.
 
 GitHub Pages publica los cambios que se suben a `main`. Editar archivos localmente no publica la web: es necesario guardar los cambios en Git y subirlos al repositorio.
+
+## Languages
+
+The homepage is published as genuine static HTML in three languages:
+- English: `/` (default)
+- Spanish: `/es/`
+- Catalan: `/ca/`
+
+The EN / ES / CA selector preserves the current in-page anchor. The site uses the same CSS and JS for all three versions; translations are already present in the HTML for indexing/accessibility, and `hreflang` / canonical links are included. Technical case-study articles remain in English, noted in the ES and CA blog section.
