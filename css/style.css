@@ -358,6 +358,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 .scroll-cue { display: inline-flex; align-items: center; gap: 15px; font-size: 9px; letter-spacing: 1.5px; color: #a6aab5; }
 .scroll-cue > span { font-size: 23px; color: #f2f3f5; }
 .scene-controls { display: flex; gap: 18px; }
+@media (min-width: 701px) {
+  .hero-bottomline { position: relative; }
+  .hero-bottomline > .scene-controls { position: absolute; left: 50%; transform: translateX(-50%); }
+}
 .scene-controls button { border: 0; background: none; padding: 12px 0; color: #9299a7; display: flex; gap: 8px; align-items: center; font: inherit; font-size: 10px; cursor: pointer; }
 .scene-controls button span { width: 40px; height: 2px; background: #3d4451; transition: background .2s; }
 .scene-controls button[aria-pressed="true"] { color: #fff; }
@@ -464,7 +468,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
   .scene-credit { width: 100%; margin-left: 0; text-align: right; font-size: 10px; margin-top: 12px; }
   .scene-credit > span { display: inline; }
   .scene-credit > span:first-child { display: block; font-size: 8px; }
-  .scene-controls { gap: 12px; }
+  .scene-controls { gap: 12px; margin-left: auto; margin-right: auto; }
   .scene-controls button span { width: 26px; }
   .hero-scene img { object-position: 65% center; }
   .sprouts-scene img { object-position: 50% center; }
