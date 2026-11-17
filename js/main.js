@@ -71,8 +71,6 @@
     document.querySelectorAll('[data-slide]').forEach(function (control) {
       control.setAttribute('aria-pressed', String(Number(control.dataset.slide) === selected));
     });
-    document.getElementById('scene-category').textContent = scenes[selected].category;
-    document.getElementById('scene-title').textContent = scenes[selected].title;
     document.querySelector('.scene-credit').href = scenes[selected].url;
   }
   function scheduleScene() {
