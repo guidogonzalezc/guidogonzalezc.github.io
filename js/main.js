@@ -173,7 +173,7 @@
     });
   });
 
-  document.querySelectorAll('.discipline-grid, .project-grid, .experience-list, .notes-section, .case-summary-grid').forEach(function (group) {
+  document.querySelectorAll('.discipline-grid, .project-grid, .more-projects-grid, .experience-list, .cv-details, .notes-section, .case-summary-grid').forEach(function (group) {
     group.querySelectorAll('.reveal').forEach(function (element, index) {
       element.style.setProperty('--reveal-delay', Math.min(index * 90, 270) + 'ms');
     });
@@ -205,7 +205,7 @@
         control.setAttribute('aria-pressed', String(active));
       });
       var filter = button.dataset.filter;
-      document.querySelectorAll('[data-tag]').forEach(function (row) {
+      document.querySelectorAll('.blog-section [data-tag]').forEach(function (row) {
         row.hidden = filter !== 'ALL' && row.dataset.tag !== filter;
       });
     });

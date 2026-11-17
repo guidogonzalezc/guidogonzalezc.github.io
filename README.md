@@ -21,11 +21,12 @@ Desde la carpeta del proyecto ejecuta `python -m http.server 4174` y abre http:/
 ## Editar contenido
 
 - `index.html`: portada, presentación, proyectos, showreel, experiencia y contacto.
-- `about.html`, `blog.html`, `contact.html`: páginas interiores.
+- `index.html` contiene About, Selected Work, Showreel, CV, Blog y Contact como secciones enlazadas.
+- `about.html`, `blog.html`, `contact.html`: redirecciones a sus secciones de la portada, para preservar enlaces anteriores.
 - `posts/`: artículos y breakdowns, con sus direcciones originales.
 - `css/style.css`: estilos compartidos, portada y tamaños para móvil.
 - `css/works.css`: diseño de las páginas de proyecto, índice lateral, explicaciones y código desplegable.
-- `js/main.js`: menú móvil, selector de fondos, animaciones y filtros del blog.
+- `js/main.js`: menú móvil, selector de fondos, animaciones y filtros del blog integrado.
 - `assets/`: imágenes locales y favicon.
 - `scripts/`: herramientas descargables de Maya.
 
